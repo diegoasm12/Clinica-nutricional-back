@@ -3,6 +3,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigType } from '@nestjs/config';
+import { RolModule } from './modules/rol/rol.module';
+import { UsuarioModule } from './modules/usuario/usuario.module';
+import { RRolUsuarioModule } from './modules/r-rol-usuario/r-rol-usuario.module';
+import { FichaModule } from './modules/ficha/ficha.module';
+import { AnamnesisSocialModule } from './modules/anamnesis_social/anamnesis_social.module';
+import { AnamnesisClinicaModule } from './modules/anamnesis_clinica/anamnesis_clinica.module';
+import { AnamnesisAlimentariaModule } from './modules/anamnesis_alimentaria/anamnesis_alimentaria.module';
 import joiConfig from './core/configs/joi.config';
 import dbEnv from './shared/envs/db.env';
 import appEnv from './shared/envs/app.env';
@@ -29,6 +36,13 @@ import jwtEnv from './shared/envs/jwt.env';
       }),
       inject: [dbEnv.KEY],
     }),
+    RolModule,
+    UsuarioModule,
+    RRolUsuarioModule,
+    FichaModule,
+    AnamnesisSocialModule,
+    AnamnesisClinicaModule,
+    AnamnesisAlimentariaModule,
   ],
   controllers: [AppController],
   providers: [AppService],
