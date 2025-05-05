@@ -10,6 +10,10 @@ import { FichaModule } from './modules/ficha/ficha.module';
 import { AnamnesisSocialModule } from './modules/anamnesis_social/anamnesis_social.module';
 import { AnamnesisClinicaModule } from './modules/anamnesis_clinica/anamnesis_clinica.module';
 import { AnamnesisAlimentariaModule } from './modules/anamnesis_alimentaria/anamnesis_alimentaria.module';
+import { AlimentosModule } from './modules/alimentos/alimentos.module';
+import { RAnamnesisAlimentariaAlimentosModule } from './modules/r-anamnesis_alimentaria-alimentos/r-anamnesis_alimentaria-alimentos.module';
+import { Registro24hModule } from './modules/registro24h/registro24h.module';
+import { EncuestaTendenciaConsumoModule } from './modules/encuesta_tendencia_consumo/encuesta_tendencia_consumo.module';
 import joiConfig from './core/configs/joi.config';
 import dbEnv from './shared/envs/db.env';
 import appEnv from './shared/envs/app.env';
@@ -43,6 +47,10 @@ import jwtEnv from './shared/envs/jwt.env';
     AnamnesisSocialModule,
     AnamnesisClinicaModule,
     AnamnesisAlimentariaModule,
+    AlimentosModule,
+    RAnamnesisAlimentariaAlimentosModule,
+    Registro24hModule,
+    EncuestaTendenciaConsumoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
