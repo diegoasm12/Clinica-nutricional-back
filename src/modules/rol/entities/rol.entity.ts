@@ -13,11 +13,11 @@ export class Rol {
         name: 'ROL',
         nullable: false    
     })
-    rol:Text;
+    rol:String;
     @Column({
         type: 'text',
         name: 'DESCRIPCION',
         nullable: false
     })
-    descripcion:Text
+    descripcion:String;
 };
