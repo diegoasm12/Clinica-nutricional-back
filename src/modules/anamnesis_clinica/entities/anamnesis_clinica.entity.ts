@@ -4,7 +4,7 @@ import { Column, Entity } from "typeorm";
 export class AnamnesisClinica {
     @Column({
         primary: true,
-        type: 'number',
+        type: 'numeric',
         name: 'ID',
     })
     id:number;

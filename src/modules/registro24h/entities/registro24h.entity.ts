@@ -5,7 +5,7 @@ import { Column, Entity } from "typeorm";
 export class Registro24h {
     @Column({
         primary: true,
-        type: 'number',
+        type: 'numeric',
         name: 'ID'
     })
     id: number;

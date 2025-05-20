@@ -5,12 +5,12 @@ import { Column, Entity } from "typeorm";
 export class Usuario {
     @Column({
         primary: true,
-        type: 'number',
+        type: 'numeric',
         name: 'ID',
     })
     id: number;
     @Column({
-        type: 'number',
+        type: 'numeric',
         name: 'RUT',
         nullable: false
     })
@@ -28,7 +28,7 @@ export class Usuario {
     })
     nombre:string;
     @Column({
-        type: 'number',
+        type: 'numeric',
         name: 'TELEFONO',
         nullable: false
     })

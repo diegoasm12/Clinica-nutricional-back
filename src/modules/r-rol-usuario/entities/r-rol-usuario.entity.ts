@@ -6,7 +6,7 @@ import { Column, Entity } from "typeorm";
 export class RRolUsuario {
     @Column({
         primary: true,
-        type: 'number',
+        type: 'numeric',
         name: 'ID'
     })
     id: number;

@@ -5,7 +5,7 @@ import { Column, Entity } from "typeorm";
 export class Examan {
     @Column({
         primary: true,
-        type: 'number',
+        type: 'numeric',
         name: 'ID'
     })
     id: number;

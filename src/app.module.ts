@@ -12,7 +12,6 @@ import { AnamnesisClinicaModule } from './modules/anamnesis_clinica/anamnesis_cl
 import { AnamnesisAlimentariaModule } from './modules/anamnesis_alimentaria/anamnesis_alimentaria.module';
 import { Registro24hModule } from './modules/registro24h/registro24h.module';
 import { EncuestaTendenciaConsumoModule } from './modules/encuesta_tendencia_consumo/encuesta_tendencia_consumo.module';
-import { ExamenModule } from './examen/examen.module';
 import { ExamenModule } from './modules/examen/examen.module';
 import { SignoSintomaModule } from './modules/signo_sintoma/signo_sintoma.module';
 import { HabitoModule } from './modules/habito/habito.module';
