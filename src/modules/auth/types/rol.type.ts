@@ -1,1 +1,1 @@
-export type RolType = 'Administrador';
+export type RolType = 'Nutricionista' | 'Paciente';
