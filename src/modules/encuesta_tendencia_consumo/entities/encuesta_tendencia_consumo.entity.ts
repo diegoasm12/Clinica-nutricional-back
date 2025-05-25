@@ -1,15 +1,20 @@
-import { Column, Entity } from "typeorm";
+import { Ficha } from 'src/modules/ficha/entities/ficha.entity';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
-
-@Entity({name:'ENCUESTA_TENDENCIA_CONSUMO'})
+@Entity({ name: 'ENCUESTA_TENDENCIA_CONSUMO' })
 export class EncuestaTendenciaConsumo {
-    @Column({
-        primary: true,
-        type: 'numeric',
-        name: 'ID',
-    })
-    id:number; 
+  @Column({
+    primary: true,
+    type: 'numeric',
+    name: 'ID',
+  })
+  id: number;
 
-    //FKFICHA!¿¿¿¿????
-
+  @ManyToOne(() => Ficha, {
+    nullable: true,
+    onDelete: 'NO ACTION',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn({ name: 'FK_FICHA' })
+  ficha: Ficha;
 }

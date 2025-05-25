@@ -1,32 +1,38 @@
-import { Column, Entity } from "typeorm";
+import { AnamnesisClinica } from 'src/modules/anamnesis_clinica/entities/anamnesis_clinica.entity';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
-
-@Entity({name:'HABITO'})
+@Entity({ name: 'HABITO' })
 export class Habito {
-    @Column({
-        primary: true,
-        type: 'numeric',
-        name: 'ID'
-    })
-    id: number;
-    @Column({
-        type: 'text',
-        name: 'ALCOHOL',
-        nullable: false
-    })
-    alcohol:String;
-    @Column({
-        type: 'text',
-        name: 'DROGA',
-        nullable: false
-    })
-    droga:String;
-        @Column({
-        type: 'text',
-        name: 'ACTIVIDAD_FISICA',
-        nullable: false
-    })
-    actividadFisica:String;
+  @Column({
+    primary: true,
+    type: 'numeric',
+    name: 'ID',
+  })
+  id: number;
+  @Column({
+    type: 'text',
+    name: 'ALCOHOL',
+    nullable: false,
+  })
+  alcohol: String;
+  @Column({
+    type: 'text',
+    name: 'DROGA',
+    nullable: false,
+  })
+  droga: String;
+  @Column({
+    type: 'text',
+    name: 'ACTIVIDAD_FISICA',
+    nullable: false,
+  })
+  actividadFisica: String;
 
-    //fkAnamnesisclinica
+  @ManyToOne(() => AnamnesisClinica, {
+    nullable: true,
+    onDelete: 'NO ACTION',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn({ name: 'FK_ANAMNESIS_CLINICA' })
+  fkAnamnesisClinica: AnamnesisClinica;
 }

@@ -1,19 +1,17 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity } from 'typeorm';
 
-
-@Entity({name:'ALIMENTO'})
+@Entity({ name: 'ALIMENTO' })
 export class Alimento {
-    @Column({
-        primary: true,
-        type: 'numeric',
-        name: 'ID',
-    })
-    id:number;
-    @Column({
-        type:'text',
-        name: 'ALIMENTO',
-        nullable: false
-    })
-    alimento:String;
-
+  @Column({
+    primary: true,
+    type: 'numeric',
+    name: 'ID',
+  })
+  id: number;
+  @Column({
+    type: 'text',
+    name: 'ALIMENTO',
+    nullable: false,
+  })
+  alimento: String;
 }
