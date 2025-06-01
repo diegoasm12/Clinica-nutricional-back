@@ -5,6 +5,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Usuario } from './entities/usuario.entity';
 import { Repository } from 'typeorm';
 import { RRolUsuarioService } from '../r-rol-usuario/r-rol-usuario.service';
+import { RecoveryPasswordDto } from './dto/recovery-password.dto';
+import { MailManagerService } from '../mail-manager/mail-manager.service';
+import { newPasswordEmailTemplate } from 'src/shared/const/new_password_template.const';
 
 @Injectable()
 export class UsuarioService {
@@ -12,6 +15,7 @@ export class UsuarioService {
     @InjectRepository(Usuario)
     private readonly repository: Repository<Usuario>,
     private readonly rRolUsuarioService: RRolUsuarioService,
+    private readonly mailManagerService: MailManagerService,
   ) {}
 
   public async findUserForLogin(
@@ -53,5 +57,27 @@ export class UsuarioService {
     });
 
     return usuarioWhitId;
+  }
+
+  public async recoveryPassword(dto: RecoveryPasswordDto): Promise<void> {
+    const usuario = await this.repository
+      .createQueryBuilder('usuario')
+      .where('usuario.rut = :rut', { rut: dto.rut })
+      .andWhere('usuario.correo = :email', { email: dto.email })
+      .getOne();
+
+    if (!usuario) {
+      return;
+    }
+
+    const newPassword = Math.random().toString(36).slice(-8); // Genera una nueva clave aleatoria de 8 caracteres
+
+    await this.repository.update(usuario.id, { clave: newPassword });
+
+    await this.mailManagerService.sendMail({
+      to: usuario.correo,
+      subject: 'Recuperación de contraseña',
+      html: newPasswordEmailTemplate(usuario.nombre, newPassword),
+    });
   }
 }
