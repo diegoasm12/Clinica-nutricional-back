@@ -15,61 +15,61 @@ export class TomaPliegue {
     name: 'CIRCUNFERENCIA_BRAQUIAL',
     nullable: false,
   })
-  circunferenciaBraquial: String;
+  circunferenciaBraquial: string;
   @Column({
     type: 'text',
     name: 'CIRCUNFERENCIA_CADERA',
     nullable: false,
   })
-  circunferenciaCadera: String;
+  circunferenciaCadera: string;
   @Column({
     type: 'text',
     name: 'CIRCUNFERENCIA_PANTORRILLA',
     nullable: false,
   })
-  circunferenciaPantorrilla: String;
+  circunferenciaPantorrilla: string;
   @Column({
     type: 'text',
     name: 'PLIEGUE_TICIPITAL',
     nullable: false,
   })
-  pliegueTicipital: String;
+  pliegueTicipital: string;
   @Column({
     type: 'text',
     name: 'PLIEGUE_BICIPITAL',
     nullable: false,
   })
-  pliegueBicipital: String;
+  pliegueBicipital: string;
   @Column({
     type: 'text',
     name: 'PLIEGUE_SUBESCAPULAR',
     nullable: false,
   })
-  pliegueSubescapular: String;
+  pliegueSubescapular: string;
   @Column({
     type: 'text',
     name: 'PLIEGUE_SUPRAILIACO',
     nullable: false,
   })
-  pliegueSuprailiaco: String;
+  pliegueSuprailiaco: string;
   @Column({
     type: 'text',
     name: 'PLIEGUE_ABDOMINAL',
     nullable: false,
   })
-  pliegueAbdominal: String;
+  pliegueAbdominal: string;
   @Column({
     type: 'text',
     name: 'PLIEGUE_MUSLO',
     nullable: false,
   })
-  pliegueMuslo: String;
+  pliegueMuslo: string;
   @Column({
     type: 'text',
     name: 'PLIEGUE_PANTORRILLA',
     nullable: false,
   })
-  plieguePantorrilla: String;
+  plieguePantorrilla: string;
 
   @ManyToOne(() => Antropometria, {
     nullable: true,

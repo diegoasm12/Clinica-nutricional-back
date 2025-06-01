@@ -16,13 +16,13 @@ export class RRegistro24hTipocomida {
     name: 'DESCRIPCION',
     nullable: false,
   })
-  descripcion: String;
+  descripcion: string;
   @Column({
     type: 'text',
     name: 'HORA',
     nullable: false,
   })
-  hora: String;
+  hora: string;
 
   @ManyToOne(() => TipoComida, {
     nullable: true,

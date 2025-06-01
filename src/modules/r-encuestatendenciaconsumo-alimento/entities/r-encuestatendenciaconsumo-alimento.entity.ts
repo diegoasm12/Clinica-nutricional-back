@@ -16,7 +16,7 @@ export class REncuestatendenciaconsumoAlimento {
     name: 'CUANTOS_DIAS_SEMANA',
     nullable: false,
   })
-  cuantosDiasSemana: String;
+  cuantosDiasSemana: string;
 
   @ManyToOne(() => Alimento, {
     nullable: true,

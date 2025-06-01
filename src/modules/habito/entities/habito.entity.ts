@@ -15,19 +15,19 @@ export class Habito {
     name: 'ALCOHOL',
     nullable: false,
   })
-  alcohol: String;
+  alcohol: string;
   @Column({
     type: 'text',
     name: 'DROGA',
     nullable: false,
   })
-  droga: String;
+  droga: string;
   @Column({
     type: 'text',
     name: 'ACTIVIDAD_FISICA',
     nullable: false,
   })
-  actividadFisica: String;
+  actividadFisica: string;
 
   @ManyToOne(() => AnamnesisClinica, {
     nullable: true,

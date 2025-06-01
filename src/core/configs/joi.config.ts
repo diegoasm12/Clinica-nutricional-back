@@ -15,4 +15,8 @@ export default Joi.object({
   SSL_CERT_FILE: Joi.string().required(),
   SSL_KEY_FILE: Joi.string().required(),
   SSL_CA_FILE: Joi.string().required(),
+  MAIL_PASSWORD: Joi.string().required(),
+  MAIL_MAIL: Joi.string().email().required(),
+  MAIL_HOST: Joi.string().required(),
+  MAIL_PORT: Joi.number().required(),
 });

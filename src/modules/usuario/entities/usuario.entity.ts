@@ -4,7 +4,7 @@ import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity({ name: 'USUARIO' })
 export class Usuario {
-   @Column({
+  @Column({
     primary: true,
     type: 'integer',
     name: 'ID',
@@ -40,24 +40,23 @@ export class Usuario {
     name: 'CORREO',
     nullable: false,
   })
-  correo: String;
+  correo: string;
   @Column({
     type: 'text',
     name: 'SEXO',
     nullable: false,
   })
-  sexo: String;
+  sexo: string;
   @Column({
     type: 'text',
     name: 'CLAVE',
     nullable: false,
   })
-  clave: String;
+  clave: string;
 
   @OneToMany(() => RRolUsuario, (rRolUsuario) => rRolUsuario.fkUsuario)
   rRolUsuario: RRolUsuario[];
 
   @OneToMany(() => Ficha, (usuario) => usuario.fkUsuario)
   usuario: Usuario[];
-
 }

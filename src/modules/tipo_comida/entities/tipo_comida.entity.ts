@@ -15,7 +15,7 @@ export class TipoComida {
     name: 'TIPO_COMIDA',
     nullable: false,
   })
-  tipoComida: String;
+  tipoComida: string;
 
   @OneToMany(() => RRegistro24hTipocomida, (rRegistro24hTipocomida) => rRegistro24hTipocomida.fkTipoComida)
   rRegistro24hTipocomida: RRegistro24hTipocomida[];

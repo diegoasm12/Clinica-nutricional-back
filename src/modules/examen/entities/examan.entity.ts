@@ -15,13 +15,13 @@ export class Examan {
     name: 'NOMBRE_EXAMEN',
     nullable: false,
   })
-  nombreExamen: String;
+  nombreExamen: string;
   @Column({
     type: 'text',
     name: 'URL',
     nullable: false,
   })
-  url: String;
+  url: string;
 
   @ManyToOne(() => AnamnesisClinica, {
     nullable: true,
