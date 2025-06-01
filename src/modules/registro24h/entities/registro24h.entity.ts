@@ -1,5 +1,6 @@
 import { Ficha } from 'src/modules/ficha/entities/ficha.entity';
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { RRegistro24hTipocomida } from 'src/modules/r-registro24h-tipocomida/entities/r-registro24h-tipocomida.entity';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity({ name: 'REGISTRO_24H' })
 export class Registro24h {
@@ -7,6 +8,7 @@ export class Registro24h {
     primary: true,
     type: 'numeric',
     name: 'ID',
+    generated: 'increment',
   })
   id: number;
 
@@ -17,4 +19,8 @@ export class Registro24h {
   })
   @JoinColumn({ name: 'FK_FICHA' })
   fkFicha: Ficha;
+
+  @OneToMany(() => RRegistro24hTipocomida, (rRegitro24h) => rRegitro24h.fkRegistro24h)
+  rRegistro24h: Registro24h[]; 
+
 }

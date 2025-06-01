@@ -1,4 +1,5 @@
-import { Column, Entity } from 'typeorm';
+import { RRegistro24hTipocomida } from 'src/modules/r-registro24h-tipocomida/entities/r-registro24h-tipocomida.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity({ name: 'TIPO_COMIDA' })
 export class TipoComida {
@@ -6,6 +7,7 @@ export class TipoComida {
     primary: true,
     type: 'numeric',
     name: 'ID',
+    generated: 'increment',
   })
   id: number;
   @Column({
@@ -14,4 +16,7 @@ export class TipoComida {
     nullable: false,
   })
   tipoComida: String;
+
+  @OneToMany(() => RRegistro24hTipocomida, (rRegistro24hTipocomida) => rRegistro24hTipocomida.fkTipoComida)
+  rRegistro24hTipocomida: RRegistro24hTipocomida[];
 }

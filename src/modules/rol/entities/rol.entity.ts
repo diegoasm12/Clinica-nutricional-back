@@ -1,4 +1,5 @@
-import { Column, Entity } from 'typeorm';
+import { RRolUsuario } from 'src/modules/r-rol-usuario/entities/r-rol-usuario.entity';
+import { Column, Entity, JoinColumn, OneToMany } from 'typeorm';
 
 @Entity({ name: 'ROL' })
 export class Rol {
@@ -6,6 +7,7 @@ export class Rol {
     primary: true,
     type: 'numeric',
     name: 'ID',
+    generated: 'increment',
   })
   id: number;
   @Column({
@@ -20,4 +22,7 @@ export class Rol {
     nullable: false,
   })
   descripcion: String;
+
+  @OneToMany(() => RRolUsuario, (rRolUsuario) => rRolUsuario.fkRol)
+  rRolUsuario: RRolUsuario[];
 }

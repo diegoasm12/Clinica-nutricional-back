@@ -8,6 +8,7 @@ export class RRegistro24hTipocomida {
     primary: true,
     type: 'numeric',
     name: 'ID',
+    generated: 'increment',
   })
   id: number;
   @Column({

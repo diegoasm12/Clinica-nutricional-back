@@ -1,4 +1,7 @@
-import { Column, Entity } from 'typeorm';
+import { Ficha } from 'src/modules/ficha/entities/ficha.entity';
+import { Habito } from 'src/modules/habito/entities/habito.entity';
+import { SignoSintoma } from 'src/modules/signo_sintoma/entities/signo_sintoma.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity({ name: 'ANAMNESIS_CLINICA' })
 export class AnamnesisClinica {
@@ -6,6 +9,7 @@ export class AnamnesisClinica {
     primary: true,
     type: 'numeric',
     name: 'ID',
+    generated: 'increment',
   })
   id: number;
   @Column({
@@ -38,4 +42,14 @@ export class AnamnesisClinica {
     nullable: false,
   })
   alergia: string;
+
+  @OneToMany(() => SignoSintoma, (signoSintoma) => signoSintoma.fkAnamnesisClinica )
+  signoSintoma: SignoSintoma[];
+
+  @OneToMany(() => Habito, (habito) => habito.fkAnamnesisClinica)
+  habito: Habito[];
+
+  @OneToMany(() => Ficha, (ficha) => ficha.fkAnamnesisClinica)
+  ficha: Ficha[];
+
 }

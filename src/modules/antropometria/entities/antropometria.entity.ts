@@ -1,4 +1,5 @@
-import { Column, Entity } from 'typeorm';
+import { TomaPliegue } from 'src/modules/toma_pliegue/entities/toma_pliegue.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity({ name: 'ANTROPOMETRIA' })
 export class Antropometria {
@@ -6,6 +7,7 @@ export class Antropometria {
     primary: true,
     type: 'numeric',
     name: 'ID',
+    generated: 'increment',
   })
   id: number;
   @Column({
@@ -32,4 +34,8 @@ export class Antropometria {
     nullable: false,
   })
   circunferenciaCintura: String;
+
+  @OneToMany(() => TomaPliegue, (tomaPliegue) => tomaPliegue.fkAntropometria)
+  tomaPliegue: TomaPliegue[];
+
 }

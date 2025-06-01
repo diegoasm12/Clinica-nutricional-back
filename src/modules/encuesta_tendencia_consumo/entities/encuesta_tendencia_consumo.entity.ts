@@ -1,5 +1,6 @@
 import { Ficha } from 'src/modules/ficha/entities/ficha.entity';
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { REncuestatendenciaconsumoAlimento } from 'src/modules/r-encuestatendenciaconsumo-alimento/entities/r-encuestatendenciaconsumo-alimento.entity';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity({ name: 'ENCUESTA_TENDENCIA_CONSUMO' })
 export class EncuestaTendenciaConsumo {
@@ -7,6 +8,7 @@ export class EncuestaTendenciaConsumo {
     primary: true,
     type: 'numeric',
     name: 'ID',
+    generated: 'increment',
   })
   id: number;
 
@@ -17,4 +19,10 @@ export class EncuestaTendenciaConsumo {
   })
   @JoinColumn({ name: 'FK_FICHA' })
   ficha: Ficha;
+
+  @OneToMany(() => REncuestatendenciaconsumoAlimento, (rEncuestaAlimento) => rEncuestaAlimento.fkEncuestaTendenciaConsumo)
+  rEncuestaAlimento: REncuestatendenciaconsumoAlimento[];
+
+  @OneToMany(() => Ficha, (fichaEncuesta) => fichaEncuesta.fkEncuestaTendenciaConsumo)
+  fichaEncuesta: Ficha[];
 }
