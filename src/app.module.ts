@@ -22,6 +22,7 @@ import { REncuestatendenciaconsumoAlimentoModule } from './modules/r-encuestaten
 import { AntropometriaModule } from './modules/antropometria/antropometria.module';
 import { TomaPliegueModule } from './modules/toma_pliegue/toma_pliegue.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { MailManagerModule } from './modules/mail-manager/mail-manager.module';
 import joiConfig from './core/configs/joi.config';
 import dbEnv from './shared/envs/db.env';
 import appEnv from './shared/envs/app.env';
@@ -67,6 +68,7 @@ import jwtEnv from './shared/envs/jwt.env';
     AntropometriaModule,
     TomaPliegueModule,
     AuthModule,
+    MailManagerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
