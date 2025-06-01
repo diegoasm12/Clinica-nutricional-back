@@ -1,4 +1,5 @@
-export class CreateRRolUsuarioDto {
+import { CreateRRolUsuarioPartialDto } from './create-r-rol-usuario-partial.dto';
+
+export class CreateRRolUsuarioDto extends CreateRRolUsuarioPartialDto {
   fkUsuario_id: number;
-  fkRol_id: number;
 }
