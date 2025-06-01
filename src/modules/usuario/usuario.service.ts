@@ -16,9 +16,13 @@ export class UsuarioService {
     rut: number,
     password: string,
   ): Promise<Usuario> {
-    const user = await this.usuarioRepository.findOne({
-      where: { rut: rut, clave: password },
-    });
+    const user = await this.usuarioRepository
+      .createQueryBuilder('usuario')
+      .innerJoinAndSelect('usuario.rRolUsuario', 'rRolUsuario')
+      .innerJoinAndSelect('rRolUsuario.fkRol', 'rol')
+      .where('usuario.rut = :rut', { rut })
+      .andWhere('usuario.clave = :password', { password })
+      .getOne();
 
     if (!user) {
       throw new NotFoundException();

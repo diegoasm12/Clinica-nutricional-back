@@ -6,12 +6,11 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 export class Registro24h {
   @Column({
     primary: true,
-    type: 'numeric',
+    type: 'integer',
     name: 'ID',
     generated: 'increment',
   })
   id: number;
-
   @ManyToOne(() => Ficha, {
     nullable: true,
     onDelete: 'NO ACTION',

@@ -5,11 +5,11 @@ import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 export class Examan {
   @Column({
     primary: true,
-    type: 'numeric',
+    type: 'integer',
     name: 'ID',
     generated: 'increment',
   })
-  id: number; 
+  id: number;
   @Column({
     type: 'text',
     name: 'NOMBRE_EXAMEN',

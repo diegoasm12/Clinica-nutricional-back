@@ -4,15 +4,15 @@ import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity({ name: 'USUARIO' })
 export class Usuario {
-  @Column({
+   @Column({
     primary: true,
-    type: 'numeric',
+    type: 'integer',
     name: 'ID',
     generated: 'increment',
   })
   id: number;
   @Column({
-    type: 'numeric',
+    type: 'integer',
     name: 'RUT',
     nullable: false,
   })
@@ -30,7 +30,7 @@ export class Usuario {
   })
   nombre: string;
   @Column({
-    type: 'numeric',
+    type: 'integer',
     name: 'TELEFONO',
     nullable: false,
   })

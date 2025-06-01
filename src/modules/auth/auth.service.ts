@@ -12,6 +12,7 @@ import { Usuario } from '../usuario/entities/usuario.entity';
 import { UsuarioService } from '../usuario/usuario.service';
 import { JwtService } from '@nestjs/jwt';
 import { LoginAuthDto } from './dto/login-auth.dto';
+import { Payload } from 'src/shared/interfaces/payload/payload.interface';
 
 @Injectable()
 export class AuthService {
@@ -28,9 +29,10 @@ export class AuthService {
         loginAuthDto.password,
       );
 
-      const payload = {
+      const payload: Payload = {
         rut: user.rut,
         nombre: user.nombre,
+        rols: user.rRolUsuario.map((rRolUsuario) => rRolUsuario.fkRol),
       };
 
       const token = await this.jwtService.signAsync(payload);
