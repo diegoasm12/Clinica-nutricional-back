@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
-import { RolType } from '../../types/rol.type';
+import { RolType } from '../../../../shared/types/rol.type';
 import { RolMetadataKey } from '../../decorators/roles/roles.decorator';
 import { Rol } from 'src/modules/rol/entities/rol.entity';
 

@@ -1,6 +1,6 @@
 import { applyDecorators, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../../guards/auth/auth.guard';
-import { RolType } from '../../types/rol.type';
+import { RolType } from '../../../../shared/types/rol.type';
 import { Roles } from '../roles/roles.decorator';
 import { AuthzGuard } from '../../guards/authz/authz.guard';
 
