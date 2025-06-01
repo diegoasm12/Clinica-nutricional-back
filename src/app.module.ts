@@ -27,13 +27,14 @@ import joiConfig from './core/configs/joi.config';
 import dbEnv from './shared/envs/db.env';
 import appEnv from './shared/envs/app.env';
 import jwtEnv from './shared/envs/jwt.env';
+import mailEnv from './shared/envs/mail.env';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: joiConfig,
-      load: [appEnv, dbEnv, jwtEnv],
+      load: [appEnv, dbEnv, jwtEnv, mailEnv],
     }),
     TypeOrmModule.forRootAsync({
       useFactory: async (dbConfigService: ConfigType<typeof dbEnv>) => ({
