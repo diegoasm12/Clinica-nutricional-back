@@ -16,14 +16,14 @@ export class Rol {
     name: 'ROL',
     nullable: false,
   })
-  rol: String;
+  rol: string;
 
   @Column({
     type: 'text',
     name: 'DESCRIPCION',
     nullable: true,
   })
-  descripcion: String;
+  descripcion: string;
 
   @OneToMany(() => RRolUsuario, (rRolUsuario) => rRolUsuario.fkRol)
   rRolUsuario: RRolUsuario[];

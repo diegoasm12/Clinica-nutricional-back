@@ -15,7 +15,7 @@ export class Alimento {
     name: 'ALIMENTO',
     nullable: false,
   })
-  alimento: String;
+  alimento: string;
 
   @OneToMany(() => REncuestatendenciaconsumoAlimento, (rAlimentoEncuesta) => rAlimentoEncuesta.fkAlimento)
   rAlimentoEncuesta: REncuestatendenciaconsumoAlimento[];

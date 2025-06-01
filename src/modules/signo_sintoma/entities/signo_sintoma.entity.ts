@@ -15,61 +15,61 @@ export class SignoSintoma {
     name: 'DIURESIS',
     nullable: false,
   })
-  diuresis: String;
+  diuresis: string;
   @Column({
     type: 'text',
     name: 'APETITO',
     nullable: false,
   })
-  apetito: String;
+  apetito: string;
   @Column({
     type: 'text',
     name: 'CALAMBRE',
     nullable: false,
   })
-  calambre: String;
+  calambre: string;
   @Column({
     type: 'text',
     name: 'POLIDIPSIA',
     nullable: false,
   })
-  polidipsia: String;
+  polidipsia: string;
   @Column({
     type: 'text',
     name: 'POLIURIA',
     nullable: false,
   })
-  poliuria: String;
+  poliuria: string;
   @Column({
     type: 'text',
     name: 'DEPOSICION_BRISTOL',
     nullable: false,
   })
-  deposicionBristol: String;
+  deposicionBristol: string;
   @Column({
     type: 'text',
     name: 'TINITUS',
     nullable: false,
   })
-  tinitus: String;
+  tinitus: string;
   @Column({
     type: 'text',
     name: 'SUDORACION_NOCTURNA',
     nullable: false,
   })
-  sudoracionNocturna: String;
+  sudoracionNocturna: string;
   @Column({
     type: 'text',
     name: 'POLIFAGIA',
     nullable: false,
   })
-  polifagia: String;
+  polifagia: string;
   @Column({
     type: 'text',
     name: 'OTRO',
     nullable: false,
   })
-  otro: String;
+  otro: string;
 
   @ManyToOne(() => AnamnesisClinica, {
     nullable: true,

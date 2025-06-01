@@ -16,27 +16,27 @@ export class Antropometria {
     name: 'PESO',
     nullable: false,
   })
-  peso: String;
+  peso: string;
 
   @Column({
     type: 'text',
     name: 'IMC',
     nullable: false,
   })
-  imc: String;
+  imc: string;
 
   @Column({
     type: 'text',
     name: 'TALLA',
     nullable: false,
   })
-  talla: String;
+  talla: string;
   @Column({
     type: 'text',
     name: 'CIRCUNFERENCIA_CINTURA',
     nullable: false,
   })
-  circunferenciaCintura: String;
+  circunferenciaCintura: string;
 
   @OneToMany(() => TomaPliegue, (tomaPliegue) => tomaPliegue.fkAntropometria)
   tomaPliegue: TomaPliegue[];
