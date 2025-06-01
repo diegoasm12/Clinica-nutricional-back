@@ -1,4 +1,5 @@
-import { Column, Entity } from 'typeorm';
+import { Ficha } from 'src/modules/ficha/entities/ficha.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity({ name: 'ANAMNESIS_SOCIAL' })
 export class AnamnesisSocial {
@@ -6,6 +7,7 @@ export class AnamnesisSocial {
     primary: true,
     type: 'numeric',
     name: 'ID',
+    generated: 'increment',
   })
   id: number;
   @Column({
@@ -50,4 +52,8 @@ export class AnamnesisSocial {
     nullable: false,
   })
   serviciosBasicos: string;
+
+  @OneToMany(() => Ficha, (ficha) => ficha.fkAnamnesisSocial)
+  ficha: Ficha[];
+
 }

@@ -7,8 +7,9 @@ export class Examan {
     primary: true,
     type: 'numeric',
     name: 'ID',
+    generated: 'increment',
   })
-  id: number;
+  id: number; 
   @Column({
     type: 'text',
     name: 'NOMBRE_EXAMEN',

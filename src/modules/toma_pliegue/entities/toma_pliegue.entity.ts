@@ -7,6 +7,7 @@ export class TomaPliegue {
     primary: true,
     type: 'numeric',
     name: 'ID',
+    generated: 'increment',
   })
   id: number;
   @Column({

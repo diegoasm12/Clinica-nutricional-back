@@ -1,4 +1,5 @@
-import { Column, Entity } from 'typeorm';
+import { REncuestatendenciaconsumoAlimento } from 'src/modules/r-encuestatendenciaconsumo-alimento/entities/r-encuestatendenciaconsumo-alimento.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity({ name: 'ALIMENTO' })
 export class Alimento {
@@ -6,6 +7,7 @@ export class Alimento {
     primary: true,
     type: 'numeric',
     name: 'ID',
+    generated: 'increment',
   })
   id: number;
   @Column({
@@ -14,4 +16,8 @@ export class Alimento {
     nullable: false,
   })
   alimento: String;
+
+  @OneToMany(() => REncuestatendenciaconsumoAlimento, (rAlimentoEncuesta) => rAlimentoEncuesta.fkAlimento)
+  rAlimentoEncuesta: REncuestatendenciaconsumoAlimento[];
+
 }
