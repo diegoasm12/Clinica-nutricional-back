@@ -5,7 +5,7 @@ import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 export class Habito {
   @Column({
     primary: true,
-    type: 'numeric',
+    type: 'integer',
     name: 'ID',
     generated: 'increment',
   })

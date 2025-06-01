@@ -5,7 +5,7 @@ import { Column, Entity, OneToMany } from 'typeorm';
 export class AnamnesisSocial {
   @Column({
     primary: true,
-    type: 'numeric',
+    type: 'integer',
     name: 'ID',
     generated: 'increment',
   })
@@ -55,5 +55,4 @@ export class AnamnesisSocial {
 
   @OneToMany(() => Ficha, (ficha) => ficha.fkAnamnesisSocial)
   ficha: Ficha[];
-
 }

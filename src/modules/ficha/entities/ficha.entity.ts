@@ -1,6 +1,7 @@
 import { AnamnesisAlimentaria } from 'src/modules/anamnesis_alimentaria/entities/anamnesis_alimentaria.entity';
 import { AnamnesisClinica } from 'src/modules/anamnesis_clinica/entities/anamnesis_clinica.entity';
 import { AnamnesisSocial } from 'src/modules/anamnesis_social/entities/anamnesis_social.entity';
+import { Antropometria } from 'src/modules/antropometria/entities/antropometria.entity';
 import { EncuestaTendenciaConsumo } from 'src/modules/encuesta_tendencia_consumo/entities/encuesta_tendencia_consumo.entity';
 import { Registro24h } from 'src/modules/registro24h/entities/registro24h.entity';
 import { Usuario } from 'src/modules/usuario/entities/usuario.entity';
@@ -10,7 +11,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 export class Ficha {
   @Column({
     primary: true,
-    type: 'numeric',
+    type: 'integer',
     name: 'ID',
     generated: 'increment',
   })
@@ -62,7 +63,14 @@ export class Ficha {
   @JoinColumn({ name: 'FK_ENCUESTA_TENDENCIA_CONSUMO' })
   fkEncuestaTendenciaConsumo: EncuestaTendenciaConsumo;
 
-@OneToMany(() => Registro24h, (registro24h) => registro24h.fkFicha)
-registro24h: Registro24h[];
+  @ManyToOne(() => Antropometria, {
+    nullable: true,
+    onDelete: 'NO ACTION',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn({ name: 'FK_ANTROPOMETRIA' })
+  fkAntropometria: Antropometria;
 
+  @OneToMany(() => Registro24h, (registro24h) => registro24h.fkFicha)
+  registro24h: Registro24h[];
 }

@@ -5,23 +5,26 @@ import { Column, Entity, OneToMany } from 'typeorm';
 export class Antropometria {
   @Column({
     primary: true,
-    type: 'numeric',
+    type: 'integer',
     name: 'ID',
     generated: 'increment',
   })
   id: number;
+
   @Column({
     type: 'text',
     name: 'PESO',
     nullable: false,
   })
   peso: String;
+
   @Column({
     type: 'text',
     name: 'IMC',
     nullable: false,
   })
   imc: String;
+
   @Column({
     type: 'text',
     name: 'TALLA',
@@ -37,5 +40,4 @@ export class Antropometria {
 
   @OneToMany(() => TomaPliegue, (tomaPliegue) => tomaPliegue.fkAntropometria)
   tomaPliegue: TomaPliegue[];
-
 }

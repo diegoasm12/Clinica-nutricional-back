@@ -6,7 +6,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 export class EncuestaTendenciaConsumo {
   @Column({
     primary: true,
-    type: 'numeric',
+    type: 'integer',
     name: 'ID',
     generated: 'increment',
   })
@@ -20,9 +20,15 @@ export class EncuestaTendenciaConsumo {
   @JoinColumn({ name: 'FK_FICHA' })
   ficha: Ficha;
 
-  @OneToMany(() => REncuestatendenciaconsumoAlimento, (rEncuestaAlimento) => rEncuestaAlimento.fkEncuestaTendenciaConsumo)
+  @OneToMany(
+    () => REncuestatendenciaconsumoAlimento,
+    (rEncuestaAlimento) => rEncuestaAlimento.fkEncuestaTendenciaConsumo,
+  )
   rEncuestaAlimento: REncuestatendenciaconsumoAlimento[];
 
-  @OneToMany(() => Ficha, (fichaEncuesta) => fichaEncuesta.fkEncuestaTendenciaConsumo)
+  @OneToMany(
+    () => Ficha,
+    (fichaEncuesta) => fichaEncuesta.fkEncuestaTendenciaConsumo,
+  )
   fichaEncuesta: Ficha[];
 }

@@ -5,7 +5,7 @@ import { Column, Entity, JoinColumn, OneToMany } from 'typeorm';
 export class Rol {
   @Column({
     primary: true,
-    type: 'numeric',
+    type: 'integer',
     name: 'ID',
     generated: 'increment',
   })

@@ -3,9 +3,9 @@ import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'TOMA_PLIEGUE' })
 export class TomaPliegue {
-  @Column({
+   @Column({
     primary: true,
-    type: 'numeric',
+    type: 'integer',
     name: 'ID',
     generated: 'increment',
   })

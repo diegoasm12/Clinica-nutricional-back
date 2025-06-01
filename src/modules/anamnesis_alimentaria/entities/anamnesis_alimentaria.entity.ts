@@ -5,7 +5,7 @@ import { Column, Entity, OneToMany } from 'typeorm';
 export class AnamnesisAlimentaria {
   @Column({
     primary: true,
-    type: 'numeric',
+    type: 'integer',
     name: 'ID',
     generated: 'increment',
   })
@@ -43,5 +43,4 @@ export class AnamnesisAlimentaria {
 
   @OneToMany(() => Ficha, (ficha) => ficha.fkAnamnesisAlimentaria)
   ficha: Ficha[];
-
 }

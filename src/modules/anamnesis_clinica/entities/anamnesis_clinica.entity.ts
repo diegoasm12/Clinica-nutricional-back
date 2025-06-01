@@ -7,7 +7,7 @@ import { Column, Entity, OneToMany } from 'typeorm';
 export class AnamnesisClinica {
   @Column({
     primary: true,
-    type: 'numeric',
+    type: 'integer',
     name: 'ID',
     generated: 'increment',
   })
