@@ -16,7 +16,9 @@ export class PdfManagerController {
   constructor(private readonly pdfManagerService: PdfManagerService) {}
 
   @Get()
-  findAll() {
+  public async findAll() {
+    await this.pdfManagerService.modifyTemplate();
+
     return this.pdfManagerService.transformOdtToPdf();
   }
 }
