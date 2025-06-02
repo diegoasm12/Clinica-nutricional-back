@@ -11,8 +11,8 @@ export class AlimentoService {
     @InjectRepository(Alimento)
     private readonly alimentoRepository: Repository<Alimento>,
   ) {}
-  
+
   public async findTipoAlimento(): Promise<Alimento[]> {
-    return this.alimentoRepository.createQueryBuilder('Alimento').getMany();
+    return this.alimentoRepository.createQueryBuilder('alimento').getMany();
   }
 }

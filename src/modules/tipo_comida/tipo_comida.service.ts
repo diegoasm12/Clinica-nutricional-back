@@ -11,8 +11,8 @@ export class TipoComidaService {
     @InjectRepository(TipoComida)
     private readonly tipocomidaRepository: Repository<TipoComida>,
   ) {}
-  
+
   public async findTipoComida(): Promise<TipoComida[]> {
-    return this.tipocomidaRepository.createQueryBuilder('Tipo Comida').getMany();
+    return this.tipocomidaRepository.createQueryBuilder('tipoComida').getMany();
   }
 }
