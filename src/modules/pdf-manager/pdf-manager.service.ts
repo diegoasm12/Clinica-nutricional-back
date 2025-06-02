@@ -1,26 +1,40 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePdfManagerDto } from './dto/create-pdf-manager.dto';
 import { UpdatePdfManagerDto } from './dto/update-pdf-manager.dto';
+import { exec } from 'child_process';
+import * as path from 'path';
 
 @Injectable()
 export class PdfManagerService {
-  create(createPdfManagerDto: CreatePdfManagerDto) {
-    return 'This action adds a new pdfManager';
-  }
+  public async transformOdtToPdf(): Promise<string> {
+    const inputPath = path.resolve(
+      __dirname,
+      '..',
+      '..',
+      'assets',
+      'docs',
+      'template.docx',
+    );
+    const outputDir = path.resolve(__dirname, '..', '..', 'assets', 'docs');
 
-  findAll() {
-    return `This action returns all pdfManager`;
-  }
+    return new Promise((resolve, reject) => {
+      const command = `soffice  --headless --convert-to pdf "${inputPath}" --outdir "${outputDir}"`;
 
-  findOne(id: number) {
-    return `This action returns a #${id} pdfManager`;
-  }
+      exec(command, (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Error converting ODT to PDF: ${error.message}`);
+          return reject(error);
+        }
 
-  update(id: number, updatePdfManagerDto: UpdatePdfManagerDto) {
-    return `This action updates a #${id} pdfManager`;
-  }
+        if (stderr) {
+          console.error(`Conversion stderr: ${stderr}`);
+          // Algunos mensajes pueden estar en stderr sin ser errores
+          // Puedes comentar esta línea si te genera falsos positivos
+        }
 
-  remove(id: number) {
-    return `This action removes a #${id} pdfManager`;
+        console.log(`Conversion stdout: ${stdout}`);
+        resolve(path.join(outputDir, 'informe_nutricionista_template.pdf'));
+      });
+    });
   }
 }
