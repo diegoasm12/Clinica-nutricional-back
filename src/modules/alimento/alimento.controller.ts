@@ -14,4 +14,9 @@ import { UpdateAlimentoDto } from './dto/update-alimento.dto';
 @Controller('alimento')
 export class AlimentoController {
   constructor(private readonly alimentoService: AlimentoService) {}
+
+  @Get()
+  findALimentos() {
+    return this.alimentoService.findAlimentos();
+  }
 }

@@ -12,7 +12,7 @@ export class AlimentoService {
     private readonly alimentoRepository: Repository<Alimento>,
   ) {}
 
-  public async findTipoAlimento(): Promise<Alimento[]> {
+  public async findAlimentos(): Promise<Alimento[]> {
     return this.alimentoRepository.createQueryBuilder('alimento').getMany();
   }
 }

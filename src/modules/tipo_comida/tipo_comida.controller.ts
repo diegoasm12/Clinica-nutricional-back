@@ -14,4 +14,9 @@ import { UpdateTipoComidaDto } from './dto/update-tipo_comida.dto';
 @Controller('tipo-comida')
 export class TipoComidaController {
   constructor(private readonly tipoComidaService: TipoComidaService) {}
+
+  @Get()
+  findTiposComidas() {
+    return this.tipoComidaService.findTiposComidas();
+  }
 }

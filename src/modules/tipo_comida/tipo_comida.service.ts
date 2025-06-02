@@ -12,7 +12,7 @@ export class TipoComidaService {
     private readonly tipocomidaRepository: Repository<TipoComida>,
   ) {}
 
-  public async findTipoComida(): Promise<TipoComida[]> {
+  public async findTiposComidas(): Promise<TipoComida[]> {
     return this.tipocomidaRepository.createQueryBuilder('tipoComida').getMany();
   }
 }
