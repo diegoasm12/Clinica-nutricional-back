@@ -1,26 +1,61 @@
 import { Injectable } from '@nestjs/common';
 import { CreateFichaDto } from './dto/create-ficha.dto';
 import { UpdateFichaDto } from './dto/update-ficha.dto';
+import { Ficha } from './entities/ficha.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class FichaService {
-  create(createFichaDto: CreateFichaDto) {
-    return 'This action adds a new ficha';
+  constructor(
+    @InjectRepository(Ficha)
+    private readonly repository: Repository<Ficha>,
+  ) {}
+
+  public async createFicha(createFichaDto: CreateFichaDto): Promise<Ficha> {
+    const ficha = this.repository.create({
+      fechaCreacion: new Date(),
+      fkAnamnesisAlimentaria: {
+        id: createFichaDto.fkAnamnesisAlimentaria_id,
+      },
+      fkAnamnesisClinica: {
+        id: createFichaDto.fkAnamnesisClinica_id,
+      },
+      fkAnamnesisSocial: {
+        id: createFichaDto.fkAnamnesisSocial_id,
+      },
+      fkEncuestaTendenciaConsumo: {
+        id: createFichaDto.fkEncuestaTendenciaConsumo_id,
+      },
+      fkUsuario: {
+        id: createFichaDto.fkUsuario_id,
+      },
+    });
+
+    return this.repository.save(ficha);
   }
 
-  findAll() {
-    return `This action returns all ficha`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} ficha`;
-  }
-
-  update(id: number, updateFichaDto: UpdateFichaDto) {
-    return `This action updates a #${id} ficha`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} ficha`;
+  public async findAll(): Promise<Ficha[]> {
+    return this.repository
+      .createQueryBuilder('ficha')
+      .leftJoinAndSelect('ficha.fkUsuario', 'usuario')
+      .leftJoinAndSelect('ficha.fkAnamnesisSocial', 'anamnesisSocial')
+      .leftJoinAndSelect('ficha.fkAnamnesisClinica', 'anamnesisClinica')
+      .leftJoinAndSelect('ficha.fkAnamnesisAlimentaria', 'anamnesisAlimentaria')
+      .leftJoinAndSelect(
+        'ficha.fkEncuestaTendenciaConsumo',
+        'encuestaTendenciaConsumo',
+      )
+      .leftJoinAndSelect('ficha.antropometrias', 'antropometria')
+      .leftJoinAndSelect('antropometria.tomasPliegues', 'tomaPliegue')
+      .leftJoinAndSelect('ficha.registros24h', 'registro24h')
+      .leftJoinAndSelect(
+        'registro24h.rRegistro24hTipocomidas',
+        'rRegistro24hTipocomidas',
+      )
+      .leftJoinAndSelect('rRegistro24hTipocomidas.fkTipoComida', 'tipoComida')
+      .leftJoinAndSelect('ficha.planesNutricionales', 'planNutricional')
+      .leftJoinAndSelect('ficha.examenes', 'examen')
+      .getMany();
   }
 }

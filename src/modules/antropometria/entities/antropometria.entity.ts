@@ -56,5 +56,5 @@ export class Antropometria {
   fkFicha: Ficha;
 
   @OneToMany(() => TomaPliegue, (tomaPliegue) => tomaPliegue.fkAntropometria)
-  tomaPliegue: TomaPliegue[];
+  tomasPliegues: TomaPliegue[];
 }

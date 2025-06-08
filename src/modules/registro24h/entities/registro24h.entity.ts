@@ -24,7 +24,7 @@ export class Registro24h {
     () => RRegistro24hTipocomida,
     (rRegitro24h) => rRegitro24h.fkRegistro24h,
   )
-  rRegistro24h: Registro24h[];
+  rRegistro24hTipocomidas: RRegistro24hTipocomida[];
 
   @Column({
     type: 'date',
