@@ -35,7 +35,7 @@ export class FichaService {
     return this.repository.save(ficha);
   }
 
-  public async findAll(): Promise<Ficha[]> {
+  public async findFichas(): Promise<Ficha[]> {
     return this.repository
       .createQueryBuilder('ficha')
       .leftJoinAndSelect('ficha.fkUsuario', 'usuario')
