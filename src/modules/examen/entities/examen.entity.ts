@@ -30,7 +30,7 @@ export class Examen {
     onDelete: 'NO ACTION',
     onUpdate: 'CASCADE',
   })
-  @JoinColumn({ name: 'FICHA' })
+  @JoinColumn({ name: 'FK_FICHA' })
   fkFicha: Ficha;
 
   @Column({
