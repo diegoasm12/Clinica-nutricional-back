@@ -1,26 +1,27 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAnamnesisAlimentariaDto } from './dto/create-anamnesis_alimentaria.dto';
 import { UpdateAnamnesisAlimentariaDto } from './dto/update-anamnesis_alimentaria.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { AnamnesisAlimentaria } from './entities/anamnesis_alimentaria.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AnamnesisAlimentariaService {
-  create(createAnamnesisAlimentariaDto: CreateAnamnesisAlimentariaDto) {
-    return 'This action adds a new anamnesisAlimentaria';
-  }
+  constructor(
+    @InjectRepository(AnamnesisAlimentaria)
+    private readonly repository: Repository<AnamnesisAlimentaria>,
+  ) {}
 
-  findAll() {
-    return `This action returns all anamnesisAlimentaria`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} anamnesisAlimentaria`;
-  }
-
-  update(id: number, updateAnamnesisAlimentariaDto: UpdateAnamnesisAlimentariaDto) {
-    return `This action updates a #${id} anamnesisAlimentaria`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} anamnesisAlimentaria`;
+  public async createAnamnesisAlimentaria(
+    dto: CreateAnamnesisAlimentariaDto,
+  ): Promise<AnamnesisAlimentaria> {
+    const anamnesisAlimentaria = this.repository.create({
+      alergiaIntolerancia: dto.alergiaIntolerancia,
+      alimentoNoGusta: dto.alimentoNoGusta,
+      alimentoPreferencia: dto.alimentoPreferencia,
+      cocinaEnCasa: dto.cocinaEnCasa,
+      habitualmenteComeEn: dto.habitualmenteComeEn,
+    });
+    return this.repository.save(anamnesisAlimentaria);
   }
 }
