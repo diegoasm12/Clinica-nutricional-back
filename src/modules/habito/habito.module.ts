@@ -5,8 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Habito } from './entities/habito.entity';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([Habito])],
+  imports: [TypeOrmModule.forFeature([Habito])],
   controllers: [HabitoController],
   providers: [HabitoService],
+  exports: [HabitoService],
 })
 export class HabitoModule {}

@@ -1,26 +1,57 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAnamnesisClinicaDto } from './dto/create-anamnesis_clinica.dto';
 import { UpdateAnamnesisClinicaDto } from './dto/update-anamnesis_clinica.dto';
+import { AnamnesisClinica } from './entities/anamnesis_clinica.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { HabitoService } from '../habito/habito.service';
+import { SignoSintomaService } from '../signo_sintoma/signo_sintoma.service';
 
 @Injectable()
 export class AnamnesisClinicaService {
-  create(createAnamnesisClinicaDto: CreateAnamnesisClinicaDto) {
-    return 'This action adds a new anamnesisClinica';
-  }
+  constructor(
+    @InjectRepository(AnamnesisClinica)
+    private readonly repository: Repository<AnamnesisClinica>,
+    private readonly habitoService: HabitoService,
+    private readonly signoSintomaticoService: SignoSintomaService,
+  ) {}
 
-  findAll() {
-    return `This action returns all anamnesisClinica`;
-  }
+  public async createAnamnesisClinica(
+    createAnamnesisClinicaDto: CreateAnamnesisClinicaDto,
+  ): Promise<AnamnesisClinica> {
+    const anamnesisClinica = this.repository.create({
+      alergia: createAnamnesisClinicaDto.alergia,
+      anetecedenteQuirurgico: createAnamnesisClinicaDto.anetecedenteQuirurgico,
+      antecedenteFamiliar: createAnamnesisClinicaDto.antecedenteFamiliar,
+      medicamento: createAnamnesisClinicaDto.medicamento,
+      patologiaBase: createAnamnesisClinicaDto.patologiaBase,
+    });
 
-  findOne(id: number) {
-    return `This action returns a #${id} anamnesisClinica`;
-  }
+    const anamnesisClinicaWithId = await this.repository.save(anamnesisClinica);
 
-  update(id: number, updateAnamnesisClinicaDto: UpdateAnamnesisClinicaDto) {
-    return `This action updates a #${id} anamnesisClinica`;
-  }
+    await this.habitoService.createHabito({
+      actividadFisica: createAnamnesisClinicaDto.habito.actividadFisica,
+      alcohol: createAnamnesisClinicaDto.habito.alcohol,
+      droga: createAnamnesisClinicaDto.habito.droga,
+      fkAnamnesisClinica_id: anamnesisClinicaWithId.id,
+    });
 
-  remove(id: number) {
-    return `This action removes a #${id} anamnesisClinica`;
+    await this.signoSintomaticoService.createSignoSintoma({
+      apetito: createAnamnesisClinicaDto.signoSintoma.apetito,
+      calambre: createAnamnesisClinicaDto.signoSintoma.calambre,
+      deposicionBristol:
+        createAnamnesisClinicaDto.signoSintoma.deposicionBristol,
+      diuresis: createAnamnesisClinicaDto.signoSintoma.diuresis,
+      otro: createAnamnesisClinicaDto.signoSintoma.otro,
+      polidipsia: createAnamnesisClinicaDto.signoSintoma.polidipsia,
+      polifagia: createAnamnesisClinicaDto.signoSintoma.polifagia,
+      poliuria: createAnamnesisClinicaDto.signoSintoma.poliuria,
+      sudoracionNocturna:
+        createAnamnesisClinicaDto.signoSintoma.sudoracionNocturna,
+      tinitus: createAnamnesisClinicaDto.signoSintoma.tinitus,
+      fkAnamnesisClinica_id: anamnesisClinicaWithId.id,
+    });
+
+    return anamnesisClinicaWithId;
   }
 }

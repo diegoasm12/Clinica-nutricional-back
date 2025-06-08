@@ -1,26 +1,36 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSignoSintomaDto } from './dto/create-signo_sintoma.dto';
 import { UpdateSignoSintomaDto } from './dto/update-signo_sintoma.dto';
+import { SignoSintoma } from './entities/signo_sintoma.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class SignoSintomaService {
-  create(createSignoSintomaDto: CreateSignoSintomaDto) {
-    return 'This action adds a new signoSintoma';
-  }
+  constructor(
+    @InjectRepository(SignoSintoma)
+    private readonly repository: Repository<SignoSintoma>,
+  ) {}
 
-  findAll() {
-    return `This action returns all signoSintoma`;
-  }
+  public async createSignoSintoma(
+    createSignoSintomaDto: CreateSignoSintomaDto,
+  ): Promise<SignoSintoma> {
+    const signoSintoma = this.repository.create({
+      apetito: createSignoSintomaDto.apetito,
+      calambre: createSignoSintomaDto.calambre,
+      deposicionBristol: createSignoSintomaDto.deposicionBristol,
+      diuresis: createSignoSintomaDto.diuresis,
+      otro: createSignoSintomaDto.otro,
+      polidipsia: createSignoSintomaDto.polidipsia,
+      polifagia: createSignoSintomaDto.polifagia,
+      poliuria: createSignoSintomaDto.poliuria,
+      sudoracionNocturna: createSignoSintomaDto.sudoracionNocturna,
+      tinitus: createSignoSintomaDto.tinitus,
+      fkAnamnesisClinica: {
+        id: createSignoSintomaDto.fkAnamnesisClinica_id,
+      },
+    });
 
-  findOne(id: number) {
-    return `This action returns a #${id} signoSintoma`;
-  }
-
-  update(id: number, updateSignoSintomaDto: UpdateSignoSintomaDto) {
-    return `This action updates a #${id} signoSintoma`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} signoSintoma`;
+    return this.repository.save(signoSintoma);
   }
 }
