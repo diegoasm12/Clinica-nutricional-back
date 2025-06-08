@@ -23,6 +23,7 @@ import { AntropometriaModule } from './modules/antropometria/antropometria.modul
 import { TomaPliegueModule } from './modules/toma_pliegue/toma_pliegue.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { MailManagerModule } from './modules/mail-manager/mail-manager.module';
+import { PdfManagerModule } from './modules/pdf-manager/pdf-manager.module';
 import joiConfig from './core/configs/joi.config';
 import dbEnv from './shared/envs/db.env';
 import appEnv from './shared/envs/app.env';
@@ -70,6 +71,7 @@ import mailEnv from './shared/envs/mail.env';
     TomaPliegueModule,
     AuthModule,
     MailManagerModule,
+    PdfManagerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
