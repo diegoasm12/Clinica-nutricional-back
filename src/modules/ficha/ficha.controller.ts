@@ -14,4 +14,14 @@ import { UpdateFichaDto } from './dto/update-ficha.dto';
 @Controller('ficha')
 export class FichaController {
   constructor(private readonly fichaService: FichaService) {}
+
+  @Get()
+  findAll() {
+    return this.fichaService.findFichas();
+  }
+
+  @Post()
+  create(@Body() createFichaDto: CreateFichaDto) {
+    return this.fichaService.createFicha(createFichaDto);
+  }
 }
