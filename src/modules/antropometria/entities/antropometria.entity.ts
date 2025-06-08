@@ -1,5 +1,6 @@
+import { Ficha } from 'src/modules/ficha/entities/ficha.entity';
 import { TomaPliegue } from 'src/modules/toma_pliegue/entities/toma_pliegue.entity';
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity({ name: 'ANTROPOMETRIA' })
 export class Antropometria {
@@ -31,18 +32,28 @@ export class Antropometria {
     nullable: false,
   })
   talla: string;
+
   @Column({
-    type: 'text',
-    name: 'CIRCUNFERENCIA_CINTURA',
+    type: 'date',
+    name: 'FECHA_CREACION',
     nullable: false,
   })
-  circunferenciaCintura: string;
+  fechaCreacion: Date | null;
+
   @Column({
     type: 'date',
     name: 'FECHA_ELIMINACION',
     nullable: true,
   })
   fechaEliminacion: Date | null;
+
+  @ManyToOne(() => Ficha, {
+    nullable: true,
+    onDelete: 'NO ACTION',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn({ name: 'FK_FICHA' })
+  fkFicha: Ficha;
 
   @OneToMany(() => TomaPliegue, (tomaPliegue) => tomaPliegue.fkAntropometria)
   tomaPliegue: TomaPliegue[];

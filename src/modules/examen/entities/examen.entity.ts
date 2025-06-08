@@ -1,8 +1,8 @@
-import { AnamnesisClinica } from 'src/modules/anamnesis_clinica/entities/anamnesis_clinica.entity';
+import { Ficha } from 'src/modules/ficha/entities/ficha.entity';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'EXAMEN' })
-export class Examan {
+export class Examen {
   @Column({
     primary: true,
     type: 'integer',
@@ -10,12 +10,14 @@ export class Examan {
     generated: 'increment',
   })
   id: number;
+
   @Column({
     type: 'text',
     name: 'NOMBRE_EXAMEN',
     nullable: false,
   })
   nombreExamen: string;
+
   @Column({
     type: 'text',
     name: 'URL',
@@ -23,17 +25,18 @@ export class Examan {
   })
   url: string;
 
-  @ManyToOne(() => AnamnesisClinica, {
+  @ManyToOne(() => Ficha, {
     nullable: true,
     onDelete: 'NO ACTION',
     onUpdate: 'CASCADE',
   })
+  @JoinColumn({ name: 'FICHA' })
+  fkFicha: Ficha;
+
   @Column({
     type: 'date',
     name: 'FECHA_ELIMINACION',
     nullable: true,
   })
   fechaEliminacion: Date | null;
-  @JoinColumn({ name: 'FK_ANAMNESIS_CLINICA' })
-  fkAnamnesisClinica: AnamnesisClinica;
 }

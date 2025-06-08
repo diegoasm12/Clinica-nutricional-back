@@ -10,24 +10,28 @@ export class Habito {
     generated: 'increment',
   })
   id: number;
+
   @Column({
     type: 'text',
     name: 'ALCOHOL',
     nullable: false,
   })
   alcohol: string;
+
   @Column({
     type: 'text',
     name: 'DROGA',
     nullable: false,
   })
   droga: string;
+
   @Column({
     type: 'text',
     name: 'ACTIVIDAD_FISICA',
     nullable: false,
   })
   actividadFisica: string;
+
   @Column({
     type: 'date',
     name: 'FECHA_ELIMINACION',

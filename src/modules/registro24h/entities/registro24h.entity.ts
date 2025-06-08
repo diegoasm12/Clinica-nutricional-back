@@ -11,6 +11,7 @@ export class Registro24h {
     generated: 'increment',
   })
   id: number;
+
   @ManyToOne(() => Ficha, {
     nullable: true,
     onDelete: 'NO ACTION',
@@ -24,6 +25,13 @@ export class Registro24h {
     (rRegitro24h) => rRegitro24h.fkRegistro24h,
   )
   rRegistro24h: Registro24h[];
+
+  @Column({
+    type: 'date',
+    name: 'FECHA_CREACION',
+    nullable: false,
+  })
+  fechaCreacion: Date | null;
 
   @Column({
     type: 'date',

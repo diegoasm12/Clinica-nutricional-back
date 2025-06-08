@@ -18,12 +18,13 @@ import { HabitoModule } from './modules/habito/habito.module';
 import { TipoComidaModule } from './modules/tipo_comida/tipo_comida.module';
 import { RRegistro24hTipocomidaModule } from './modules/r-registro24h-tipocomida/r-registro24h-tipocomida.module';
 import { AlimentoModule } from './modules/alimento/alimento.module';
-import { REncuestatendenciaconsumoAlimentoModule } from './modules/r-encuestatendenciaconsumo-alimento/r-encuestatendenciaconsumo-alimento.module';
 import { AntropometriaModule } from './modules/antropometria/antropometria.module';
 import { TomaPliegueModule } from './modules/toma_pliegue/toma_pliegue.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { MailManagerModule } from './modules/mail-manager/mail-manager.module';
 import { PdfManagerModule } from './modules/pdf-manager/pdf-manager.module';
+import { PlanNutricionalModule } from './modules/plan-nutricional/plan-nutricional.module';
+import { REncuestaTendenciaConsumoAlimentoModule } from './modules/r-encuesta-tendencia-consumo-alimento/r-encuesta-tendencia-consumo-alimento.module';
 import joiConfig from './core/configs/joi.config';
 import dbEnv from './shared/envs/db.env';
 import appEnv from './shared/envs/app.env';
@@ -66,12 +67,13 @@ import mailEnv from './shared/envs/mail.env';
     TipoComidaModule,
     RRegistro24hTipocomidaModule,
     AlimentoModule,
-    REncuestatendenciaconsumoAlimentoModule,
     AntropometriaModule,
     TomaPliegueModule,
     AuthModule,
     MailManagerModule,
     PdfManagerModule,
+    PlanNutricionalModule,
+    REncuestaTendenciaConsumoAlimentoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -10,6 +10,7 @@ export class TipoComida {
     generated: 'increment',
   })
   id: number;
+
   @Column({
     type: 'text',
     name: 'TIPO_COMIDA',

@@ -3,7 +3,7 @@ import { EncuestaTendenciaConsumo } from 'src/modules/encuesta_tendencia_consumo
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'R_ENCUESTA_TENDENCIA_CONSUMO_ALIMENTO' })
-export class REncuestatendenciaconsumoAlimento {
+export class REncuestaTendenciaConsumoAlimento {
   @Column({
     primary: true,
     type: 'integer',
@@ -11,12 +11,14 @@ export class REncuestatendenciaconsumoAlimento {
     generated: 'increment',
   })
   id: number;
+
   @Column({
     type: 'text',
     name: 'CUANTOS_DIAS_SEMANA',
     nullable: false,
   })
   cuantosDiasSemana: string;
+
   @Column({
     type: 'date',
     name: 'FECHA_ELIMINACION',

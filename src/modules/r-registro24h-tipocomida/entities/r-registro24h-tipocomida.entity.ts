@@ -11,12 +11,14 @@ export class RRegistro24hTipocomida {
     generated: 'increment',
   })
   id: number;
+
   @Column({
     type: 'text',
     name: 'DESCRIPCION',
     nullable: false,
   })
   descripcion: string;
+
   @Column({
     type: 'text',
     name: 'HORA',

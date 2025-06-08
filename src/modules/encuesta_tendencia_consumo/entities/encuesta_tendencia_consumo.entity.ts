@@ -1,5 +1,5 @@
 import { Ficha } from 'src/modules/ficha/entities/ficha.entity';
-import { REncuestatendenciaconsumoAlimento } from 'src/modules/r-encuestatendenciaconsumo-alimento/entities/r-encuestatendenciaconsumo-alimento.entity';
+import { REncuestaTendenciaConsumoAlimento } from 'src/modules/r-encuesta-tendencia-consumo-alimento/entities/r-encuesta-tendencia-consumo-alimento.entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity({ name: 'ENCUESTA_TENDENCIA_CONSUMO' })
@@ -12,13 +12,6 @@ export class EncuestaTendenciaConsumo {
   })
   id: number;
 
-  @ManyToOne(() => Ficha, {
-    nullable: true,
-    onDelete: 'NO ACTION',
-    onUpdate: 'CASCADE',
-  })
-  @JoinColumn({ name: 'FK_FICHA' })
-  ficha: Ficha;
   @Column({
     type: 'date',
     name: 'FECHA_ELIMINACION',
@@ -27,14 +20,8 @@ export class EncuestaTendenciaConsumo {
   fechaEliminacion: Date | null;
 
   @OneToMany(
-    () => REncuestatendenciaconsumoAlimento,
+    () => REncuestaTendenciaConsumoAlimento,
     (rEncuestaAlimento) => rEncuestaAlimento.fkEncuestaTendenciaConsumo,
   )
-  rEncuestaAlimento: REncuestatendenciaconsumoAlimento[];
-
-  @OneToMany(
-    () => Ficha,
-    (fichaEncuesta) => fichaEncuesta.fkEncuestaTendenciaConsumo,
-  )
-  fichaEncuesta: Ficha[];
+  rEncuestaTendenciaConsumoAlimento: REncuestaTendenciaConsumoAlimento[];
 }

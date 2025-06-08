@@ -11,42 +11,51 @@ export class Usuario {
     generated: 'increment',
   })
   id: number;
+
   @Column({
     type: 'integer',
     name: 'RUT',
     nullable: false,
+    unique: true,
   })
   rut: number;
+
   @Column({
     type: 'date',
     name: 'FECHA_NACIMIENTO',
     nullable: false,
   })
   fechaNacimiento: Date;
+
   @Column({
     type: 'text',
     name: 'NOMBRE',
     nullable: false,
   })
   nombre: string;
+
   @Column({
     type: 'integer',
     name: 'TELEFONO',
     nullable: false,
   })
   telefono: Number;
+
   @Column({
     type: 'text',
     name: 'CORREO',
     nullable: false,
+    unique: true,
   })
   correo: string;
+
   @Column({
     type: 'text',
     name: 'SEXO',
     nullable: false,
   })
   sexo: string;
+
   @Column({
     type: 'text',
     name: 'CLAVE',

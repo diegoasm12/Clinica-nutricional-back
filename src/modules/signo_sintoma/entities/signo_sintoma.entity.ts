@@ -10,60 +10,70 @@ export class SignoSintoma {
     generated: 'increment',
   })
   id: number;
+
   @Column({
     type: 'text',
     name: 'DIURESIS',
     nullable: false,
   })
   diuresis: string;
+
   @Column({
     type: 'text',
     name: 'APETITO',
     nullable: false,
   })
   apetito: string;
+
   @Column({
     type: 'text',
     name: 'CALAMBRE',
     nullable: false,
   })
   calambre: string;
+
   @Column({
     type: 'text',
     name: 'POLIDIPSIA',
     nullable: false,
   })
   polidipsia: string;
+
   @Column({
     type: 'text',
     name: 'POLIURIA',
     nullable: false,
   })
   poliuria: string;
+
   @Column({
     type: 'text',
     name: 'DEPOSICION_BRISTOL',
     nullable: false,
   })
   deposicionBristol: string;
+
   @Column({
     type: 'text',
     name: 'TINITUS',
     nullable: false,
   })
   tinitus: string;
+
   @Column({
     type: 'text',
     name: 'SUDORACION_NOCTURNA',
     nullable: false,
   })
   sudoracionNocturna: string;
+
   @Column({
     type: 'text',
     name: 'POLIFAGIA',
     nullable: false,
   })
   polifagia: string;
+
   @Column({
     type: 'text',
     name: 'OTRO',
