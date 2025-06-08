@@ -1,26 +1,31 @@
 import { Injectable } from '@nestjs/common';
 import { CreateREncuestaTendenciaConsumoAlimentoDto } from './dto/create-r-encuesta-tendencia-consumo-alimento.dto';
 import { UpdateREncuestaTendenciaConsumoAlimentoDto } from './dto/update-r-encuesta-tendencia-consumo-alimento.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { REncuestaTendenciaConsumoAlimento } from './entities/r-encuesta-tendencia-consumo-alimento.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class REncuestaTendenciaConsumoAlimentoService {
-  create(createREncuestaTendenciaConsumoAlimentoDto: CreateREncuestaTendenciaConsumoAlimentoDto) {
-    return 'This action adds a new rEncuestaTendenciaConsumoAlimento';
-  }
+  constructor(
+    @InjectRepository(REncuestaTendenciaConsumoAlimento)
+    private readonly repository: Repository<REncuestaTendenciaConsumoAlimento>,
+  ) {}
 
-  findAll() {
-    return `This action returns all rEncuestaTendenciaConsumoAlimento`;
-  }
+  public async createREncuestaTendenciaConsumoAlimento(
+    createREncuestaTendenciaConsumoAlimentoDto: CreateREncuestaTendenciaConsumoAlimentoDto,
+  ): Promise<REncuestaTendenciaConsumoAlimento> {
+    const rEncuestaTendenciaConsumoAlimento = this.repository.create({
+      cuantosDiasSemana:
+        createREncuestaTendenciaConsumoAlimentoDto.cuantosDiasSemana,
+      fkAlimento: {
+        id: createREncuestaTendenciaConsumoAlimentoDto.fkAlimento_id,
+      },
+      fkEncuestaTendenciaConsumo: {
+        id: createREncuestaTendenciaConsumoAlimentoDto.fkEncuestaTendenciaConsumo_id,
+      },
+    });
 
-  findOne(id: number) {
-    return `This action returns a #${id} rEncuestaTendenciaConsumoAlimento`;
-  }
-
-  update(id: number, updateREncuestaTendenciaConsumoAlimentoDto: UpdateREncuestaTendenciaConsumoAlimentoDto) {
-    return `This action updates a #${id} rEncuestaTendenciaConsumoAlimento`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} rEncuestaTendenciaConsumoAlimento`;
+    return this.repository.save(rEncuestaTendenciaConsumoAlimento);
   }
 }

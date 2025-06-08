@@ -8,5 +8,6 @@ import { REncuestaTendenciaConsumoAlimento } from './entities/r-encuesta-tendenc
   imports: [TypeOrmModule.forFeature([REncuestaTendenciaConsumoAlimento])],
   controllers: [REncuestaTendenciaConsumoAlimentoController],
   providers: [REncuestaTendenciaConsumoAlimentoService],
+  exports: [REncuestaTendenciaConsumoAlimentoService],
 })
 export class REncuestaTendenciaConsumoAlimentoModule {}

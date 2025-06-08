@@ -1,26 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import { CreateEncuestaTendenciaConsumoDto } from './dto/create-encuesta_tendencia_consumo.dto';
 import { UpdateEncuestaTendenciaConsumoDto } from './dto/update-encuesta_tendencia_consumo.dto';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { REncuestaTendenciaConsumoAlimentoService } from '../r-encuesta-tendencia-consumo-alimento/r-encuesta-tendencia-consumo-alimento.service';
+import { EncuestaTendenciaConsumo } from './entities/encuesta_tendencia_consumo.entity';
 
 @Injectable()
 export class EncuestaTendenciaConsumoService {
-  create(createEncuestaTendenciaConsumoDto: CreateEncuestaTendenciaConsumoDto) {
-    return 'This action adds a new encuestaTendenciaConsumo';
-  }
+  constructor(
+    @InjectRepository(EncuestaTendenciaConsumo)
+    private readonly repository: Repository<EncuestaTendenciaConsumo>,
+    private readonly rEncuestaTendenciaConsumoAlimentoService: REncuestaTendenciaConsumoAlimentoService,
+  ) {}
 
-  findAll() {
-    return `This action returns all encuestaTendenciaConsumo`;
-  }
+  public async createEncuestaTendenciaConsumo(
+    dto: CreateEncuestaTendenciaConsumoDto,
+  ): Promise<EncuestaTendenciaConsumo> {
+    const encuestaTendenciaConsumo = this.repository.create({});
 
-  findOne(id: number) {
-    return `This action returns a #${id} encuestaTendenciaConsumo`;
-  }
+    const encuestaTendenciaConsumoWhithId = await this.repository.save(
+      encuestaTendenciaConsumo,
+    );
 
-  update(id: number, updateEncuestaTendenciaConsumoDto: UpdateEncuestaTendenciaConsumoDto) {
-    return `This action updates a #${id} encuestaTendenciaConsumo`;
-  }
+    for (const item of dto.rEncuestaTendenciaConsumoAlimentos) {
+      await this.rEncuestaTendenciaConsumoAlimentoService.createREncuestaTendenciaConsumoAlimento(
+        {
+          cuantosDiasSemana: item.cuantosDiasSemana,
+          fkAlimento_id: item.fkAlimento_id,
+          fkEncuestaTendenciaConsumo_id: encuestaTendenciaConsumoWhithId.id,
+        },
+      );
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} encuestaTendenciaConsumo`;
+    return encuestaTendenciaConsumoWhithId;
   }
 }
