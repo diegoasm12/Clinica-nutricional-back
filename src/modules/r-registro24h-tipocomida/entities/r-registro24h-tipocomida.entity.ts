@@ -24,6 +24,13 @@ export class RRegistro24hTipocomida {
   })
   hora: string;
 
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
+
   @ManyToOne(() => TipoComida, {
     nullable: true,
     onDelete: 'NO ACTION',

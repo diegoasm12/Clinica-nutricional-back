@@ -28,6 +28,12 @@ export class Habito {
     nullable: false,
   })
   actividadFisica: string;
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
 
   @ManyToOne(() => AnamnesisClinica, {
     nullable: true,

@@ -27,4 +27,11 @@ export class Rol {
 
   @OneToMany(() => RRolUsuario, (rRolUsuario) => rRolUsuario.fkRol)
   rRolUsuario: RRolUsuario[];
+
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
 }

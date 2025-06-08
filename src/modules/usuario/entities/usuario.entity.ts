@@ -59,4 +59,11 @@ export class Usuario {
 
   @OneToMany(() => Ficha, (usuario) => usuario.fkUsuario)
   usuario: Usuario[];
+
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
 }

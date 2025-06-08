@@ -17,6 +17,12 @@ export class REncuestatendenciaconsumoAlimento {
     nullable: false,
   })
   cuantosDiasSemana: string;
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
 
   @ManyToOne(() => Alimento, {
     nullable: true,

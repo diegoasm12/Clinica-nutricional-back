@@ -16,12 +16,20 @@ export class Ficha {
     generated: 'increment',
   })
   id: number;
+
   @Column({
     type: 'date',
     name: 'FECHA_CREACION',
     nullable: false,
   })
   fechaCreacion: Date;
+
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
 
   @ManyToOne(() => Usuario, {
     nullable: true,

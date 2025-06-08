@@ -40,6 +40,12 @@ export class AnamnesisAlimentaria {
     nullable: false,
   })
   habitualmenteComeEn: string;
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
 
   @OneToMany(() => Ficha, (ficha) => ficha.fkAnamnesisAlimentaria)
   ficha: Ficha[];

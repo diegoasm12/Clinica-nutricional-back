@@ -3,7 +3,7 @@ import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'TOMA_PLIEGUE' })
 export class TomaPliegue {
-   @Column({
+  @Column({
     primary: true,
     type: 'integer',
     name: 'ID',
@@ -78,4 +78,11 @@ export class TomaPliegue {
   })
   @JoinColumn({ name: 'FK_ANTROPOMETRIA' })
   fkAntropometria: Antropometria;
+
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
 }

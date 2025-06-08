@@ -28,6 +28,12 @@ export class Examan {
     onDelete: 'NO ACTION',
     onUpdate: 'CASCADE',
   })
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
   @JoinColumn({ name: 'FK_ANAMNESIS_CLINICA' })
   fkAnamnesisClinica: AnamnesisClinica;
 }

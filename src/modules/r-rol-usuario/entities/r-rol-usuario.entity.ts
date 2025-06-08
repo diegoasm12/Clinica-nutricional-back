@@ -27,4 +27,11 @@ export class RRolUsuario {
   })
   @JoinColumn({ name: 'FK_ROL' })
   fkRol: Rol;
+
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
 }

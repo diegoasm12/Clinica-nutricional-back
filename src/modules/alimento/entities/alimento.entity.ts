@@ -17,7 +17,16 @@ export class Alimento {
   })
   alimento: string;
 
-  @OneToMany(() => REncuestatendenciaconsumoAlimento, (rAlimentoEncuesta) => rAlimentoEncuesta.fkAlimento)
-  rAlimentoEncuesta: REncuestatendenciaconsumoAlimento[];
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
 
+  @OneToMany(
+    () => REncuestatendenciaconsumoAlimento,
+    (rAlimentoEncuesta) => rAlimentoEncuesta.fkAlimento,
+  )
+  rAlimentoEncuesta: REncuestatendenciaconsumoAlimento[];
 }

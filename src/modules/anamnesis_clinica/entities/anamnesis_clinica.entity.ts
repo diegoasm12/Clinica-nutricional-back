@@ -42,8 +42,17 @@ export class AnamnesisClinica {
     nullable: false,
   })
   alergia: string;
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
 
-  @OneToMany(() => SignoSintoma, (signoSintoma) => signoSintoma.fkAnamnesisClinica )
+  @OneToMany(
+    () => SignoSintoma,
+    (signoSintoma) => signoSintoma.fkAnamnesisClinica,
+  )
   signoSintoma: SignoSintoma[];
 
   @OneToMany(() => Habito, (habito) => habito.fkAnamnesisClinica)
@@ -51,5 +60,4 @@ export class AnamnesisClinica {
 
   @OneToMany(() => Ficha, (ficha) => ficha.fkAnamnesisClinica)
   ficha: Ficha[];
-
 }

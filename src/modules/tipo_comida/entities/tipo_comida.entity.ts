@@ -17,6 +17,16 @@ export class TipoComida {
   })
   tipoComida: string;
 
-  @OneToMany(() => RRegistro24hTipocomida, (rRegistro24hTipocomida) => rRegistro24hTipocomida.fkTipoComida)
+  @OneToMany(
+    () => RRegistro24hTipocomida,
+    (rRegistro24hTipocomida) => rRegistro24hTipocomida.fkTipoComida,
+  )
   rRegistro24hTipocomida: RRegistro24hTipocomida[];
+
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
 }

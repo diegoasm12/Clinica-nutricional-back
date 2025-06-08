@@ -19,6 +19,12 @@ export class EncuestaTendenciaConsumo {
   })
   @JoinColumn({ name: 'FK_FICHA' })
   ficha: Ficha;
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
 
   @OneToMany(
     () => REncuestatendenciaconsumoAlimento,

@@ -37,6 +37,12 @@ export class Antropometria {
     nullable: false,
   })
   circunferenciaCintura: string;
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
 
   @OneToMany(() => TomaPliegue, (tomaPliegue) => tomaPliegue.fkAntropometria)
   tomaPliegue: TomaPliegue[];

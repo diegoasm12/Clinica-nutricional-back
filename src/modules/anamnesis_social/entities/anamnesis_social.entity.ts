@@ -52,6 +52,12 @@ export class AnamnesisSocial {
     nullable: false,
   })
   serviciosBasicos: string;
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
 
   @OneToMany(() => Ficha, (ficha) => ficha.fkAnamnesisSocial)
   ficha: Ficha[];

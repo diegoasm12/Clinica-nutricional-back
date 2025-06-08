@@ -78,4 +78,11 @@ export class SignoSintoma {
   })
   @JoinColumn({ name: 'FK_ANAMNESIS_CLINICA' })
   fkAnamnesisClinica: AnamnesisClinica;
+
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
 }

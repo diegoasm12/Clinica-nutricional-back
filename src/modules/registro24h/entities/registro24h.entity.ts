@@ -19,7 +19,16 @@ export class Registro24h {
   @JoinColumn({ name: 'FK_FICHA' })
   fkFicha: Ficha;
 
-  @OneToMany(() => RRegistro24hTipocomida, (rRegitro24h) => rRegitro24h.fkRegistro24h)
-  rRegistro24h: Registro24h[]; 
+  @OneToMany(
+    () => RRegistro24hTipocomida,
+    (rRegitro24h) => rRegitro24h.fkRegistro24h,
+  )
+  rRegistro24h: Registro24h[];
 
+  @Column({
+    type: 'date',
+    name: 'FECHA_ELIMINACION',
+    nullable: true,
+  })
+  fechaEliminacion: Date | null;
 }
