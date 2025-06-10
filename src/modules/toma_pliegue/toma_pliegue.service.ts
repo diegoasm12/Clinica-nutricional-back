@@ -1,26 +1,39 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTomaPliegueDto } from './dto/create-toma_pliegue.dto';
 import { UpdateTomaPliegueDto } from './dto/update-toma_pliegue.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { TomaPliegue } from './entities/toma_pliegue.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TomaPliegueService {
-  create(createTomaPliegueDto: CreateTomaPliegueDto) {
-    return 'This action adds a new tomaPliegue';
-  }
+  constructor(
+    @InjectRepository(TomaPliegue)
+    private readonly repository: Repository<TomaPliegue>,
+  ) {}
 
-  findAll() {
-    return `This action returns all tomaPliegue`;
-  }
+  public async createTomaPliegue(
+    dto: CreateTomaPliegueDto,
+  ): Promise<TomaPliegue> {
+    const tomaPliegue: TomaPliegue = this.repository.create({
+      circunferenciaBraquial: dto.circunferenciaBraquial,
+      circunferenciaCadera: dto.circunferenciaCadera,
+      circunferenciaCintura: dto.circunferenciaCintura,
+      circunferenciaPantorrilla: dto.circunferenciaPantorrilla,
+      pliegueAbdominal: dto.pliegueAbdominal,
+      pliegueBicipital: dto.pliegueBicipital,
+      pliegueMuslo: dto.pliegueMuslo,
+      plieguePantorrilla: dto.plieguePantorrilla,
+      pliegueSubescapular: dto.pliegueSubescapular,
+      pliegueSuprailiaco: dto.pliegueSuprailiaco,
+      pliegueTicipital: dto.pliegueTicipital,
+      fkAntropometria: {
+        id: dto.fkAntropometria_id,
+      },
+      fechaCreacion: new Date(),
+    });
 
-  findOne(id: number) {
-    return `This action returns a #${id} tomaPliegue`;
-  }
-
-  update(id: number, updateTomaPliegueDto: UpdateTomaPliegueDto) {
-    return `This action updates a #${id} tomaPliegue`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} tomaPliegue`;
+    const tomaPliegueWithId = await this.repository.save(tomaPliegue);
+    return tomaPliegueWithId;
   }
 }

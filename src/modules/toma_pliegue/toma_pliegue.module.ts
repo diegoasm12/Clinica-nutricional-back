@@ -5,8 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TomaPliegue } from './entities/toma_pliegue.entity';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([TomaPliegue])],
+  imports: [TypeOrmModule.forFeature([TomaPliegue])],
   controllers: [TomaPliegueController],
   providers: [TomaPliegueService],
+  exports: [TomaPliegueService],
 })
 export class TomaPliegueModule {}
