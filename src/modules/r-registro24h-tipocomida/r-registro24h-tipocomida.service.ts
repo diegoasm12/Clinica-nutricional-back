@@ -1,26 +1,32 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRRegistro24hTipocomidaDto } from './dto/create-r-registro24h-tipocomida.dto';
 import { UpdateRRegistro24hTipocomidaDto } from './dto/update-r-registro24h-tipocomida.dto';
+import { RRegistro24hTipocomida } from './entities/r-registro24h-tipocomida.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class RRegistro24hTipocomidaService {
-  create(createRRegistro24hTipocomidaDto: CreateRRegistro24hTipocomidaDto) {
-    return 'This action adds a new rRegistro24hTipocomida';
-  }
+  constructor(
+    @InjectRepository(RRegistro24hTipocomida)
+    private readonly repository: Repository<RRegistro24hTipocomida>,
+  ) {}
 
-  findAll() {
-    return `This action returns all rRegistro24hTipocomida`;
-  }
+  public async createRRegistro24hTipocomida(
+    dto: CreateRRegistro24hTipocomidaDto,
+  ): Promise<RRegistro24hTipocomida> {
+    const rRegistro24hTipocomida: RRegistro24hTipocomida =
+      this.repository.create({
+        fkTipoComida: {
+          id: dto.fkTipoComida_id,
+        },
+        fkRegistro24h: {
+          id: dto.fkRegistro24h_id,
+        },
+        hora: dto.hora,
+        descripcion: dto.descripcion,
+      });
 
-  findOne(id: number) {
-    return `This action returns a #${id} rRegistro24hTipocomida`;
-  }
-
-  update(id: number, updateRRegistro24hTipocomidaDto: UpdateRRegistro24hTipocomidaDto) {
-    return `This action updates a #${id} rRegistro24hTipocomida`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} rRegistro24hTipocomida`;
+    return await this.repository.save(rRegistro24hTipocomida);
   }
 }
