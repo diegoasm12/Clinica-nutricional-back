@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigType } from '@nestjs/config';
 import { RolModule } from './modules/rol/rol.module';
@@ -75,7 +73,5 @@ import mailEnv from './shared/envs/mail.env';
     PlanNutricionalModule,
     REncuestaTendenciaConsumoAlimentoModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
