@@ -52,7 +52,7 @@ export class PlanNutricional {
     name: 'FECHA_CREACION',
     nullable: false,
   })
-  fechaCreacion: Date | null;
+  fechaCreacion: Date;
 
   @Column({
     type: 'date',
