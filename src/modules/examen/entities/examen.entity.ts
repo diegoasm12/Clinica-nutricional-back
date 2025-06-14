@@ -20,10 +20,10 @@ export class Examen {
 
   @Column({
     type: 'text',
-    name: 'URL',
+    name: 'NOMBRE_ARCHIVO',
     nullable: false,
   })
-  url: string;
+  nombreArchivo: string;
 
   @ManyToOne(() => Ficha, {
     nullable: true,

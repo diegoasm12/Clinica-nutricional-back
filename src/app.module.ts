@@ -23,6 +23,7 @@ import { MailManagerModule } from './modules/mail-manager/mail-manager.module';
 import { PdfManagerModule } from './modules/pdf-manager/pdf-manager.module';
 import { PlanNutricionalModule } from './modules/plan-nutricional/plan-nutricional.module';
 import { REncuestaTendenciaConsumoAlimentoModule } from './modules/r-encuesta-tendencia-consumo-alimento/r-encuesta-tendencia-consumo-alimento.module';
+import { FileManagerModule } from './modules/file-manager/file-manager.module';
 import joiConfig from './core/configs/joi.config';
 import dbEnv from './shared/envs/db.env';
 import appEnv from './shared/envs/app.env';
@@ -72,6 +73,7 @@ import mailEnv from './shared/envs/mail.env';
     PdfManagerModule,
     PlanNutricionalModule,
     REncuestaTendenciaConsumoAlimentoModule,
+    FileManagerModule,
   ],
 })
 export class AppModule {}
