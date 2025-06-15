@@ -14,4 +14,17 @@ import { UpdateRRolUsuarioDto } from './dto/update-r-rol-usuario.dto';
 @Controller('r-rol-usuario')
 export class RRolUsuarioController {
   constructor(private readonly rRolUsuarioService: RRolUsuarioService) {}
+
+  @Post()
+  public async create(@Body() createRRolUsuarioDto: CreateRRolUsuarioDto) {
+    return this.rRolUsuarioService.createRRolUsuario(createRRolUsuarioDto);
+  }
+
+  @Patch(':id')
+  public async update(
+    @Param('id') id: number,
+    @Body() updateRRolUsuarioDto: UpdateRRolUsuarioDto,
+  ) {
+    return this.rRolUsuarioService.updateRRolUsuario(id, updateRRolUsuarioDto);
+  }
 }

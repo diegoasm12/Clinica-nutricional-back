@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateRRolUsuarioDto } from './dto/create-r-rol-usuario.dto';
 import { UpdateRRolUsuarioDto } from './dto/update-r-rol-usuario.dto';
 import { RRolUsuario } from './entities/r-rol-usuario.entity';
@@ -25,5 +25,28 @@ export class RRolUsuarioService {
     });
 
     return this.repository.save(rRolUsuario);
+  }
+
+  public async updateRRolUsuario(
+    id: number,
+    dto: UpdateRRolUsuarioDto,
+  ): Promise<RRolUsuario> {
+    const rRolUsuario = await this.repository.findOneBy({ id });
+
+    if (!rRolUsuario) {
+      throw new BadRequestException(`rRolUsuario with id ${id} not found`);
+    }
+
+    let fechaEliminacion: Date | null = null;
+
+    if (dto.estado === 'eliminar') {
+      fechaEliminacion = new Date();
+    }
+
+    const updatedRRolUsuario = this.repository.merge(rRolUsuario, {
+      fechaEliminacion: fechaEliminacion,
+    });
+
+    return this.repository.save(updatedRRolUsuario);
   }
 }

@@ -1,4 +1,7 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateRRolUsuarioDto } from './create-r-rol-usuario.dto';
+import { IsIn, IsNotEmpty, IsNumber, Min } from 'class-validator';
 
-export class UpdateRRolUsuarioDto extends PartialType(CreateRRolUsuarioDto) {}
+export class UpdateRRolUsuarioDto {
+  @IsIn(['eliminar', 'restaurar'])
+  @IsNotEmpty()
+  estado: 'eliminar' | 'restaurar';
+}
