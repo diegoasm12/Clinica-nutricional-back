@@ -30,4 +30,9 @@ export class UsuarioController {
   findAll() {
     return this.usuarioService.findUsers();
   }
+
+  @Get(':rut')
+  findOne(@Param('rut') rut: number) {
+    return this.usuarioService.findUserByRut(rut);
+  }
 }

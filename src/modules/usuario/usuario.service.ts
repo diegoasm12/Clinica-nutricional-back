@@ -46,6 +46,21 @@ export class UsuarioService {
       .getMany();
   }
 
+  public async findUserByRut(rut: number): Promise<Usuario> {
+    const user = await this.repository
+      .createQueryBuilder('usuario')
+      .innerJoinAndSelect('usuario.rRolUsuario', 'rRolUsuario')
+      .innerJoinAndSelect('rRolUsuario.fkRol', 'rol')
+      .where('usuario.rut = :rut', { rut })
+      .getOne();
+
+    if (!user) {
+      throw new NotFoundException(`Usuario con RUT ${rut} no encontrado`);
+    }
+
+    return user;
+  }
+
   public async createUsuario(dto: CreateUsuarioDto): Promise<Usuario> {
     const clave = Math.random().toString(36).slice(-8); // Genera una clave aleatoria de 8 caracteres
     const usuario = this.repository.create({
