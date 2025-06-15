@@ -31,7 +31,10 @@ export class RRolUsuarioService {
     id: number,
     dto: UpdateRRolUsuarioDto,
   ): Promise<RRolUsuario> {
-    const rRolUsuario = await this.repository.findOneBy({ id });
+    const rRolUsuario = await this.repository
+      .createQueryBuilder('rRolUsuario')
+      .where('rRolUsuario.id = :id', { id })
+      .getOne();
 
     if (!rRolUsuario) {
       throw new BadRequestException(`rRolUsuario with id ${id} not found`);
@@ -43,7 +46,7 @@ export class RRolUsuarioService {
       fechaEliminacion = new Date();
     }
 
-    const updatedRRolUsuario = this.repository.merge(rRolUsuario, {
+    const updatedRRolUsuario = this.repository.create({
       fechaEliminacion: fechaEliminacion,
     });
 

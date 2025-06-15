@@ -32,7 +32,11 @@ export class AnamnesisSocialService {
     id: number,
     updateAnamnesisSocialDto: UpdateAnamnesisSocialDto,
   ): Promise<AnamnesisSocial> {
-    const anamnesisSocial = await this.repository.findOneBy({ id });
+    const anamnesisSocial = await this.repository
+      .createQueryBuilder('anamnesisSocial')
+      .where('anamnesisSocial.id = :id', { id })
+      .getOne();
+
     if (!anamnesisSocial) {
       throw new NotFoundException('Anamnesis Social not found');
     }

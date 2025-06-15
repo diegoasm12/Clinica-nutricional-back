@@ -29,7 +29,11 @@ export class AnamnesisAlimentariaService {
     id: number,
     dto: UpdateAnamnesisAlimentariaDto,
   ): Promise<AnamnesisAlimentaria> {
-    const anamnesisAlimentaria = await this.repository.findOneBy({ id });
+    const anamnesisAlimentaria = await this.repository
+      .createQueryBuilder('anamnesisAlimentaria')
+      .where('anamnesisAlimentaria.id = :id', { id })
+      .getOne();
+
     if (!anamnesisAlimentaria) {
       throw new Error('Anamnesis Alimentaria not found');
     }
