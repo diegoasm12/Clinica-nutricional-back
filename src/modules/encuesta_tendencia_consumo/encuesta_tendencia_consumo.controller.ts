@@ -16,4 +16,14 @@ export class EncuestaTendenciaConsumoController {
   constructor(
     private readonly encuestaTendenciaConsumoService: EncuestaTendenciaConsumoService,
   ) {}
+
+  @Post()
+  create(
+    @Body()
+    createEncuestaTendenciaConsumoDto: CreateEncuestaTendenciaConsumoDto,
+  ) {
+    return this.encuestaTendenciaConsumoService.createEncuestaTendenciaConsumo(
+      createEncuestaTendenciaConsumoDto,
+    );
+  }
 }
