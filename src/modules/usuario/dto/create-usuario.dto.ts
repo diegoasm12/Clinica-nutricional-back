@@ -13,16 +13,22 @@ import { CreateRRolUsuarioPartialDto } from 'src/modules/r-rol-usuario/dto/creat
 export class CreateUsuarioDto {
   @IsNumber()
   rut: number;
+
   @IsDate()
   fechaNacimiento: Date;
+
   @IsString()
   nombre: string;
+
   @IsNumber()
   telefono: number;
+
   @IsEmail()
   correo: string;
+
   @IsIn(['M', 'F'])
   sexo: 'M' | 'F';
+
   @ValidateNested()
   @Type(() => CreateRRolUsuarioPartialDto)
   @IsNotEmpty()
