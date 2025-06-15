@@ -5,8 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { RRegistro24hTipocomida } from './entities/r-registro24h-tipocomida.entity';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([RRegistro24hTipocomida])],
+  imports: [TypeOrmModule.forFeature([RRegistro24hTipocomida])],
   controllers: [RRegistro24hTipocomidaController],
   providers: [RRegistro24hTipocomidaService],
+  exports: [RRegistro24hTipocomidaService],
 })
 export class RRegistro24hTipocomidaModule {}
