@@ -3,7 +3,7 @@ import { IsNumber, IsString, Min, MinLength } from 'class-validator';
 export class CreateREncuestaTendenciaConsumoAlimentoPartialDto {
   @IsString()
   @MinLength(1)
-  cuantosDiasSemana?: string;
+  cuantosDiasSemana: string;
 
   @IsNumber()
   @Min(1)

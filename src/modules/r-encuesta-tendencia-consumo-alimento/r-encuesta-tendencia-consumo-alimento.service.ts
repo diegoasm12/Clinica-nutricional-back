@@ -4,6 +4,7 @@ import { UpdateREncuestaTendenciaConsumoAlimentoDto } from './dto/update-r-encue
 import { InjectRepository } from '@nestjs/typeorm';
 import { REncuestaTendenciaConsumoAlimento } from './entities/r-encuesta-tendencia-consumo-alimento.entity';
 import { Repository } from 'typeorm';
+import e from 'express';
 
 @Injectable()
 export class REncuestaTendenciaConsumoAlimentoService {
@@ -27,5 +28,40 @@ export class REncuestaTendenciaConsumoAlimentoService {
     });
 
     return this.repository.save(rEncuestaTendenciaConsumoAlimento);
+  }
+
+  public async updateREncuestaTendenciaConsumoAlimento(
+    id: number,
+    updateREncuestaTendenciaConsumoAlimentoDto: UpdateREncuestaTendenciaConsumoAlimentoDto,
+  ): Promise<REncuestaTendenciaConsumoAlimento> {
+    const rEncuestaTendenciaConsumoAlimento = await this.repository
+      .createQueryBuilder('rEncuestaTendenciaConsumoAlimento')
+      .where('rEncuestaTendenciaConsumoAlimento.id = :id', { id })
+      .getOne();
+
+    if (!rEncuestaTendenciaConsumoAlimento) {
+      throw new Error('Encuesta Tendencia Consumo Alimento not found');
+    }
+
+    let fechaEliminacion: Date | null | undefined = undefined;
+
+    if (updateREncuestaTendenciaConsumoAlimentoDto.estado === 'eliminar') {
+      fechaEliminacion = new Date();
+    } else if (
+      updateREncuestaTendenciaConsumoAlimentoDto.estado === 'restaurar'
+    ) {
+      fechaEliminacion = null;
+    }
+
+    const updatedREncuestaTendenciaConsumoAlimento = this.repository.create({
+      cuantosDiasSemana:
+        updateREncuestaTendenciaConsumoAlimentoDto.cuantosDiasSemana,
+      fkAlimento: {
+        id: updateREncuestaTendenciaConsumoAlimentoDto.fkAlimento_id,
+      },
+      fechaEliminacion: fechaEliminacion,
+    });
+
+    return this.repository.save(updatedREncuestaTendenciaConsumoAlimento);
   }
 }
