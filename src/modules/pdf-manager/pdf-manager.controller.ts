@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  StreamableFile,
 } from '@nestjs/common';
 import { PdfManagerService } from './pdf-manager.service';
 import { CreatePdfManagerDto } from './dto/create-pdf-manager.dto';
@@ -15,10 +16,8 @@ import { UpdatePdfManagerDto } from './dto/update-pdf-manager.dto';
 export class PdfManagerController {
   constructor(private readonly pdfManagerService: PdfManagerService) {}
 
-  @Get()
-  public async findAll() {
-    await this.pdfManagerService.modifyTemplate();
-
-    return this.pdfManagerService.transformOdtToPdf();
+  @Get('plan-nutricional/:rut')
+  getPlanNutricional(@Param('rut') rut: number): Promise<StreamableFile> {
+    return this.pdfManagerService.modifyTemplatePlanNutricional(rut);
   }
 }

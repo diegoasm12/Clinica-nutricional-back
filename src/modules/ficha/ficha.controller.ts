@@ -16,12 +16,17 @@ export class FichaController {
   constructor(private readonly fichaService: FichaService) {}
 
   @Get()
-  findAll() {
+  findFichas() {
     return this.fichaService.findFichas();
   }
 
   @Post()
   create(@Body() createFichaDto: CreateFichaDto) {
     return this.fichaService.createFicha(createFichaDto);
+  }
+
+  @Get(':rut')
+  findFichaByRut(@Param('rut') rut: number) {
+    return this.fichaService.findFichaByRut(rut);
   }
 }
