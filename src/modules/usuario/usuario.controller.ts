@@ -25,4 +25,9 @@ export class UsuarioController {
   recoveryPassword(@Body() recoveryPasswordDto: RecoveryPasswordDto) {
     return this.usuarioService.recoveryPassword(recoveryPasswordDto);
   }
+
+  @Get()
+  findAll() {
+    return this.usuarioService.findUsers();
+  }
 }

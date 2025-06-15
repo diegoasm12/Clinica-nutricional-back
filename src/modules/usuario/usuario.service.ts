@@ -37,6 +37,14 @@ export class UsuarioService {
     return user;
   }
 
+  public async findUsers(): Promise<Usuario[]> {
+    return this.repository
+      .createQueryBuilder('usuario')
+      .innerJoinAndSelect('usuario.rRolUsuario', 'rRolUsuario')
+      .innerJoinAndSelect('rRolUsuario.fkRol', 'rol')
+      .getMany();
+  }
+
   public async createUsuario(dto: CreateUsuarioDto): Promise<Usuario> {
     const clave = Math.random().toString(36).slice(-8); // Genera una clave aleatoria de 8 caracteres
     const usuario = this.repository.create({
