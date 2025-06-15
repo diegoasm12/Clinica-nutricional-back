@@ -24,4 +24,24 @@ export class AnamnesisAlimentariaService {
     });
     return this.repository.save(anamnesisAlimentaria);
   }
+
+  public async updateAnamnesisAlimentaria(
+    id: number,
+    dto: UpdateAnamnesisAlimentariaDto,
+  ): Promise<AnamnesisAlimentaria> {
+    const anamnesisAlimentaria = await this.repository.findOneBy({ id });
+    if (!anamnesisAlimentaria) {
+      throw new Error('Anamnesis Alimentaria not found');
+    }
+
+    const updatedAnamnesisAlimentaria = this.repository.create({
+      alergiaIntolerancia: dto.alergiaIntolerancia,
+      alimentoNoGusta: dto.alimentoNoGusta,
+      alimentoPreferencia: dto.alimentoPreferencia,
+      cocinaEnCasa: dto.cocinaEnCasa,
+      habitualmenteComeEn: dto.habitualmenteComeEn,
+    });
+
+    return this.repository.save(updatedAnamnesisAlimentaria);
+  }
 }

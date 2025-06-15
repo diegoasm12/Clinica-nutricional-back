@@ -23,4 +23,15 @@ export class AnamnesisAlimentariaController {
       createAnamnesisAlimentariaDto,
     );
   }
+
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateAnamnesisAlimentariaDto: UpdateAnamnesisAlimentariaDto,
+  ) {
+    return this.anamnesisAlimentariaService.updateAnamnesisAlimentaria(
+      +id,
+      updateAnamnesisAlimentariaDto,
+    );
+  }
 }
