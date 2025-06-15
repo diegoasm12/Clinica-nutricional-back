@@ -1,6 +1,5 @@
 import {
   IsIn,
-  IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
@@ -21,6 +20,5 @@ export class UpdateREncuestaTendenciaConsumoAlimentoDto {
 
   @IsOptional()
   @IsIn(['eliminar', 'restaurar'])
-  @IsNotEmpty()
   estado?: 'eliminar' | 'restaurar';
 }
