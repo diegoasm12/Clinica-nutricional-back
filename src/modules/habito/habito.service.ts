@@ -23,4 +23,26 @@ export class HabitoService {
 
     return this.repository.save(habito);
   }
+
+  public async updateHabito(
+    id: number,
+    updateHabitoDto: UpdateHabitoDto,
+  ): Promise<Habito> {
+    const habito = await this.repository
+      .createQueryBuilder('habito')
+      .where('habito.id = :id', { id })
+      .getOne();
+
+    if (!habito) {
+      throw new Error('Habito not found');
+    }
+
+    const updatedHabito = this.repository.create({
+      actividadFisica: updateHabitoDto.actividadFisica,
+      alcohol: updateHabitoDto.alcohol,
+      droga: updateHabitoDto.droga,
+    });
+
+    return this.repository.save(updatedHabito);
+  }
 }

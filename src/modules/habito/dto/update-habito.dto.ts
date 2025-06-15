@@ -1,4 +1,18 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateHabitoDto } from './create-habito.dto';
+import { IsOptional, IsString, MinLength } from 'class-validator';
 
-export class UpdateHabitoDto extends PartialType(CreateHabitoDto) {}
+export class UpdateHabitoDto {
+  @IsOptional()
+  @IsString()
+  @MinLength(1)
+  alcohol?: string;
+
+  @IsOptional()
+  @IsString()
+  @MinLength(1)
+  droga?: string;
+
+  @IsOptional()
+  @IsString()
+  @MinLength(1)
+  actividadFisica?: string;
+}

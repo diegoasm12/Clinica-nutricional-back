@@ -54,4 +54,28 @@ export class AnamnesisClinicaService {
 
     return anamnesisClinicaWithId;
   }
+
+  public async updateAnamnesisClinica(
+    id: number,
+    updateAnamnesisClinicaDto: UpdateAnamnesisClinicaDto,
+  ): Promise<AnamnesisClinica> {
+    const anamnesisClinica = await this.repository
+      .createQueryBuilder('anamnesisClinica')
+      .where('anamnesisClinica.id = :id', { id })
+      .getOne();
+
+    if (!anamnesisClinica) {
+      throw new Error('Anamnesis Clinica not found');
+    }
+
+    const updatedAnamnesisClinica = this.repository.create({
+      alergia: updateAnamnesisClinicaDto.alergia,
+      anetecedenteQuirurgico: updateAnamnesisClinicaDto.anetecedenteQuirurgico,
+      antecedenteFamiliar: updateAnamnesisClinicaDto.antecedenteFamiliar,
+      medicamento: updateAnamnesisClinicaDto.medicamento,
+      patologiaBase: updateAnamnesisClinicaDto.patologiaBase,
+    });
+
+    return this.repository.save(updatedAnamnesisClinica);
+  }
 }

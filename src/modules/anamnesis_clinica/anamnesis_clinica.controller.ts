@@ -23,4 +23,15 @@ export class AnamnesisClinicaController {
       createAnamnesisClinicaDto,
     );
   }
+
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateAnamnesisClinicaDto: UpdateAnamnesisClinicaDto,
+  ) {
+    return this.anamnesisClinicaService.updateAnamnesisClinica(
+      +id,
+      updateAnamnesisClinicaDto,
+    );
+  }
 }

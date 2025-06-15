@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateSignoSintomaDto } from './dto/create-signo_sintoma.dto';
 import { UpdateSignoSintomaDto } from './dto/update-signo_sintoma.dto';
 import { SignoSintoma } from './entities/signo_sintoma.entity';
@@ -32,5 +32,34 @@ export class SignoSintomaService {
     });
 
     return this.repository.save(signoSintoma);
+  }
+
+  public async updateSignoSintoma(
+    id: number,
+    updateSignoSintomaDto: UpdateSignoSintomaDto,
+  ): Promise<SignoSintoma> {
+    const signoSintoma = await this.repository
+      .createQueryBuilder('signoSintoma')
+      .where('signoSintoma.id = :id', { id })
+      .getOne();
+
+    if (!signoSintoma) {
+      throw new NotFoundException(`SignoSintoma with id ${id} not found`);
+    }
+
+    const updatedSignoSintoma = this.repository.create({
+      apetito: updateSignoSintomaDto.apetito,
+      calambre: updateSignoSintomaDto.calambre,
+      deposicionBristol: updateSignoSintomaDto.deposicionBristol,
+      diuresis: updateSignoSintomaDto.diuresis,
+      otro: updateSignoSintomaDto.otro,
+      polidipsia: updateSignoSintomaDto.polidipsia,
+      polifagia: updateSignoSintomaDto.polifagia,
+      poliuria: updateSignoSintomaDto.poliuria,
+      sudoracionNocturna: updateSignoSintomaDto.sudoracionNocturna,
+      tinitus: updateSignoSintomaDto.tinitus,
+    });
+
+    return this.repository.save(updatedSignoSintoma);
   }
 }

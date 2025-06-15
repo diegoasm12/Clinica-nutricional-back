@@ -1,4 +1,28 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateAnamnesisClinicaDto } from './create-anamnesis_clinica.dto';
+import { IsOptional, IsString, MinLength } from 'class-validator';
 
-export class UpdateAnamnesisClinicaDto extends PartialType(CreateAnamnesisClinicaDto) {}
+export class UpdateAnamnesisClinicaDto {
+  @IsOptional()
+  @IsString()
+  @MinLength(1)
+  antecedenteFamiliar?: string;
+
+  @IsOptional()
+  @IsString()
+  @MinLength(1)
+  patologiaBase?: string;
+
+  @IsOptional()
+  @IsString()
+  @MinLength(1)
+  medicamento?: string;
+
+  @IsOptional()
+  @IsString()
+  @MinLength(1)
+  anetecedenteQuirurgico?: string;
+
+  @IsOptional()
+  @IsString()
+  @MinLength(1)
+  alergia?: string;
+}
