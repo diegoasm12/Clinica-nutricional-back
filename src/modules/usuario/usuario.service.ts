@@ -8,6 +8,7 @@ import { RRolUsuarioService } from '../r-rol-usuario/r-rol-usuario.service';
 import { RecoveryPasswordDto } from './dto/recovery-password.dto';
 import { MailManagerService } from '../mail-manager/mail-manager.service';
 import { newPasswordEmailTemplate } from 'src/shared/const/new_password_template.const';
+import { welcomeEmailTemplate } from 'src/shared/const/welcome_email_template.const';
 
 @Injectable()
 export class UsuarioService {
@@ -62,6 +63,16 @@ export class UsuarioService {
     await this.rRolUsuarioService.createRRolUsuario({
       fkRol_id: dto.rRolUsuario.fkRol_id,
       fkUsuario_id: usuarioWhitId.id,
+    });
+
+    await this.mailManagerService.sendMail({
+      to: usuarioWhitId.correo,
+      subject: 'Bienvenido a nuestro sistema',
+      html: welcomeEmailTemplate(
+        usuarioWhitId.nombre,
+        usuarioWhitId.rut.toString(),
+        clave,
+      ),
     });
 
     return usuarioWhitId;

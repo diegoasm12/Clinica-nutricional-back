@@ -1,12 +1,13 @@
-export const newPasswordEmailTemplate = (
+export const welcomeEmailTemplate = (
   name: string,
-  newPassword: string,
+  username: string,
+  password: string,
 ): string => `
   <!DOCTYPE html>
   <html lang="es">
   <head>
     <meta charset="UTF-8">
-    <title>Tu nueva contraseña</title>
+    <title>Bienvenido al sistema</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -26,16 +27,18 @@ export const newPasswordEmailTemplate = (
       h2 {
         color: #b35fc3;
       }
-      .password-box {
+      .credentials {
+        margin-top: 20px;
+      }
+      .credential-box {
         background-color: #f0f0f0;
         border: 2px dashed #b35fc3;
         padding: 14px;
         border-radius: 6px;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: bold;
         text-align: center;
-        margin-top: 20px;
-        letter-spacing: 1px;
+        margin-top: 10px;
         color: #333;
       }
       p {
@@ -52,11 +55,14 @@ export const newPasswordEmailTemplate = (
   </head>
   <body>
     <div class="container">
-      <h2>Hola ${name || 'usuario'},</h2>
-      <p>Hemos generado una nueva contraseña temporal para ti:</p>
-      <div class="password-box">${newPassword}</div>
-      <p>Por seguridad, te recomendamos cambiar esta contraseña en cuanto inicies sesión.</p>
-      <p>Si no solicitaste este cambio, por favor comunícate con el soporte técnico.</p>
+      <h2>¡Bienvenido ${name || 'usuario'}!</h2>
+      <p>Tu cuenta ha sido creada exitosamente. Estos son tus datos de acceso:</p>
+      <div class="credentials">
+        <div class="credential-box">Usuario: ${username}</div>
+        <div class="credential-box">Contraseña: ${password}</div>
+      </div>
+      <p>Por seguridad, recuerda cambiar tu contraseña después del primer inicio de sesión.</p>
+      <p>Si tienes dudas, contacta al equipo de soporte.</p>
       <div class="footer">
         Este es un correo automático, por favor no respondas directamente.
       </div>
