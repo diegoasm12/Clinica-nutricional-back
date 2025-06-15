@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAnamnesisSocialDto } from './dto/create-anamnesis_social.dto';
 import { UpdateAnamnesisSocialDto } from './dto/update-anamnesis_social.dto';
 import { AnamnesisSocial } from './entities/anamnesis_social.entity';
@@ -26,5 +26,27 @@ export class AnamnesisSocialService {
     });
 
     return this.repository.save(anamnesisSocial);
+  }
+
+  public async updateAnamnesisSocial(
+    id: number,
+    updateAnamnesisSocialDto: UpdateAnamnesisSocialDto,
+  ): Promise<AnamnesisSocial> {
+    const anamnesisSocial = await this.repository.findOneBy({ id });
+    if (!anamnesisSocial) {
+      throw new NotFoundException('Anamnesis Social not found');
+    }
+
+    const updatedAnamnesisSocial = this.repository.create({
+      asisteCon: updateAnamnesisSocialDto.asisteCon,
+      hijos: updateAnamnesisSocialDto.hijos,
+      viveCon: updateAnamnesisSocialDto.viveCon,
+      ocupacion: updateAnamnesisSocialDto.ocupacion,
+      escolaridad: updateAnamnesisSocialDto.escolaridad,
+      redesDeApoyo: updateAnamnesisSocialDto.redesDeApoyo,
+      serviciosBasicos: updateAnamnesisSocialDto.serviciosBasicos,
+    });
+
+    return this.repository.save(updatedAnamnesisSocial);
   }
 }

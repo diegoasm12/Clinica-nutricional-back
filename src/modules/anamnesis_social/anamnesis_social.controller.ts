@@ -23,4 +23,15 @@ export class AnamnesisSocialController {
       createAnamnesisSocialDto,
     );
   }
+
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateAnamnesisSocialDto: UpdateAnamnesisSocialDto,
+  ) {
+    return this.anamnesisSocialService.updateAnamnesisSocial(
+      +id,
+      updateAnamnesisSocialDto,
+    );
+  }
 }
