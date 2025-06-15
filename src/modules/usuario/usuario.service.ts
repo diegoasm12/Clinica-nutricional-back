@@ -114,4 +114,29 @@ export class UsuarioService {
       html: newPasswordEmailTemplate(usuario.nombre, newPassword),
     });
   }
+
+  public async updateUsuario(
+    id: number,
+    updateUsuarioDto: UpdateUsuarioDto,
+  ): Promise<Usuario> {
+    const usuario = await this.repository
+      .createQueryBuilder('usuario')
+      .where('usuario.id = :id', { id })
+      .getOne();
+
+    if (!usuario) {
+      throw new NotFoundException('Usuario no found');
+    }
+
+    const updatedUsuario = this.repository.create({
+      correo: updateUsuarioDto.correo,
+      fechaNacimiento: updateUsuarioDto.fechaNacimiento,
+      nombre: updateUsuarioDto.nombre,
+      rut: updateUsuarioDto.rut,
+      telefono: updateUsuarioDto.telefono,
+      sexo: updateUsuarioDto.sexo,
+    });
+
+    return this.repository.save(updatedUsuario);
+  }
 }

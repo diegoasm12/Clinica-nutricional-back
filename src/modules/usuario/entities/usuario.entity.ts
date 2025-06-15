@@ -66,8 +66,8 @@ export class Usuario {
   @OneToMany(() => RRolUsuario, (rRolUsuario) => rRolUsuario.fkUsuario)
   rRolUsuario: RRolUsuario[];
 
-  @OneToMany(() => Ficha, (usuario) => usuario.fkUsuario)
-  usuario: Usuario[];
+  @OneToMany(() => Ficha, (ficha) => ficha.fkUsuario)
+  fichas: Ficha[];
 
   @Column({
     type: 'date',

@@ -26,6 +26,11 @@ export class UsuarioController {
     return this.usuarioService.recoveryPassword(recoveryPasswordDto);
   }
 
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
+    return this.usuarioService.updateUsuario(+id, updateUsuarioDto);
+  }
+
   @Get()
   findAll() {
     return this.usuarioService.findUsers();
