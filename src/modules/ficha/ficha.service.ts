@@ -41,10 +41,20 @@ export class FichaService {
       .leftJoinAndSelect('ficha.fkUsuario', 'usuario')
       .leftJoinAndSelect('ficha.fkAnamnesisSocial', 'anamnesisSocial')
       .leftJoinAndSelect('ficha.fkAnamnesisClinica', 'anamnesisClinica')
+      .leftJoinAndSelect('anamnesisClinica.habitos', 'habitos')
+      .leftJoinAndSelect('anamnesisClinica.signosSintomas', 'signosSintomas')
       .leftJoinAndSelect('ficha.fkAnamnesisAlimentaria', 'anamnesisAlimentaria')
       .leftJoinAndSelect(
         'ficha.fkEncuestaTendenciaConsumo',
         'encuestaTendenciaConsumo',
+      )
+      .leftJoinAndSelect(
+        'encuestaTendenciaConsumo.rEncuestaTendenciaConsumoAlimentos',
+        'rEncuestaTendenciaConsumoAlimentos',
+      )
+      .leftJoinAndSelect(
+        'rEncuestaTendenciaConsumoAlimentos.fkAlimento',
+        'alimento',
       )
       .leftJoinAndSelect('ficha.antropometrias', 'antropometria')
       .leftJoinAndSelect('antropometria.tomasPliegues', 'tomaPliegue')
@@ -65,10 +75,20 @@ export class FichaService {
       .leftJoinAndSelect('ficha.fkUsuario', 'usuario')
       .leftJoinAndSelect('ficha.fkAnamnesisSocial', 'anamnesisSocial')
       .leftJoinAndSelect('ficha.fkAnamnesisClinica', 'anamnesisClinica')
+      .leftJoinAndSelect('anamnesisClinica.habitos', 'habitos')
+      .leftJoinAndSelect('anamnesisClinica.signosSintomas', 'signosSintomas')
       .leftJoinAndSelect('ficha.fkAnamnesisAlimentaria', 'anamnesisAlimentaria')
       .leftJoinAndSelect(
         'ficha.fkEncuestaTendenciaConsumo',
         'encuestaTendenciaConsumo',
+      )
+      .leftJoinAndSelect(
+        'encuestaTendenciaConsumo.rEncuestaTendenciaConsumoAlimentos',
+        'rEncuestaTendenciaConsumoAlimentos',
+      )
+      .leftJoinAndSelect(
+        'rEncuestaTendenciaConsumoAlimentos.fkAlimento',
+        'alimento',
       )
       .leftJoinAndSelect('ficha.antropometrias', 'antropometria')
       .leftJoinAndSelect('antropometria.tomasPliegues', 'tomaPliegue')
