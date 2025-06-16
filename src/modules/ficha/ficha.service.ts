@@ -49,11 +49,11 @@ export class FichaService {
         'encuestaTendenciaConsumo',
       )
       .leftJoinAndSelect(
-        'encuestaTendenciaConsumo.rEncuestaTendenciaConsumoAlimentos',
-        'rEncuestaTendenciaConsumoAlimentos',
+        'encuestaTendenciaConsumo.rEncuestaTendenciaConsumoAlimento',
+        'rEncuestaTendenciaConsumoAlimento',
       )
       .leftJoinAndSelect(
-        'rEncuestaTendenciaConsumoAlimentos.fkAlimento',
+        'rEncuestaTendenciaConsumoAlimento.fkAlimento',
         'alimento',
       )
       .leftJoinAndSelect('ficha.antropometrias', 'antropometria')
@@ -83,11 +83,11 @@ export class FichaService {
         'encuestaTendenciaConsumo',
       )
       .leftJoinAndSelect(
-        'encuestaTendenciaConsumo.rEncuestaTendenciaConsumoAlimentos',
-        'rEncuestaTendenciaConsumoAlimentos',
+        'encuestaTendenciaConsumo.rEncuestaTendenciaConsumoAlimento',
+        'rEncuestaTendenciaConsumoAlimento',
       )
       .leftJoinAndSelect(
-        'rEncuestaTendenciaConsumoAlimentos.fkAlimento',
+        'rEncuestaTendenciaConsumoAlimento.fkAlimento',
         'alimento',
       )
       .leftJoinAndSelect('ficha.antropometrias', 'antropometria')
