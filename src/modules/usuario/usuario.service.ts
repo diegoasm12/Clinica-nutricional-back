@@ -133,13 +133,13 @@ export class UsuarioService {
       throw new NotFoundException('Usuario no found');
     }
 
-    const updatedUsuario = this.repository.create({
+    const updatedUsuario = this.repository.merge(usuario, {
       correo: updateUsuarioDto.correo,
-      fechaNacimiento: updateUsuarioDto.fechaNacimiento,
       nombre: updateUsuarioDto.nombre,
-      rut: updateUsuarioDto.rut,
       telefono: updateUsuarioDto.telefono,
+      fechaNacimiento: updateUsuarioDto.fechaNacimiento,
       sexo: updateUsuarioDto.sexo,
+      rut: updateUsuarioDto.rut,
     });
 
     return this.repository.save(updatedUsuario);
