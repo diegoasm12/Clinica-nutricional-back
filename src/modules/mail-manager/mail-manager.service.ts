@@ -32,10 +32,11 @@ export class MailManagerService {
     const transporter = await this.mailTransport();
 
     const mailOptions: nodemailer.SendMailOptions = {
-      from: `"Nutricionista" <${this.mailConfigService.mailMail}}>`, // sender address
+      from: `"Nutricionista" <${this.mailConfigService.mailMail}>`, // sender address
       to: createMailManagerDto.to, // list of receivers
       subject: createMailManagerDto.subject, // Subject line
       html: createMailManagerDto.html, // html body
+      attachments: createMailManagerDto.attachments, // attachments
     };
 
     await transporter.sendMail(mailOptions);
