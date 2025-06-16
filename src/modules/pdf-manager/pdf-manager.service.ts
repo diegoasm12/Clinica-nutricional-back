@@ -13,10 +13,14 @@ import * as PizZip from 'pizzip';
 import * as fs from 'fs';
 import { FichaService } from '../ficha/ficha.service';
 import { PlanNutricional } from '../plan-nutricional/entities/plan-nutricional.entity';
+import { PlanNutricionalService } from '../plan-nutricional/plan-nutricional.service';
 
 @Injectable()
 export class PdfManagerService {
-  constructor(private readonly fichaService: FichaService) {}
+  constructor(
+    private readonly fichaService: FichaService,
+    private readonly planNutricionalService: PlanNutricionalService,
+  ) {}
 
   public async transformDocxToPdf(inputPath: string): Promise<void> {
     const outputDir = path.join(__dirname, '..', '..', '..', 'temp');
@@ -41,9 +45,12 @@ export class PdfManagerService {
   }
 
   public async modifyTemplatePlanNutricional(
-    rut: number,
+    idPlanNutricional: number,
   ): Promise<StreamableFile> {
-    const ficha = await this.fichaService.findFichaByRut(rut);
+    const planNutricional =
+      await this.planNutricionalService.findPlanNutricionalById(
+        idPlanNutricional,
+      );
 
     try {
       const assetsPath = path.join(__dirname, '..', '..');
@@ -65,25 +72,13 @@ export class PdfManagerService {
         linebreaks: true,
       });
 
-      const planNutricional: PlanNutricional | undefined =
-        ficha.planesNutricionales.reduce(
-          (latest, current) =>
-            new Date(current.fechaCreacion) > new Date(latest.fechaCreacion)
-              ? current
-              : latest,
-          ficha.planesNutricionales[0],
-        );
-
-      if (!planNutricional) {
-        throw new NotFoundException('Plan nutricional not found for the user');
-      }
-
       doc.render({
-        NOMBRE: ficha.fkUsuario.nombre,
-        RUT: ficha.fkUsuario.rut,
-        CORREO: ficha.fkUsuario.correo,
-        SEXO: ficha.fkUsuario.sexo,
-        FECHA_NACIMIENTO: ficha.fkUsuario.fechaNacimiento.toLocaleDateString(),
+        NOMBRE: planNutricional.fkFicha.fkUsuario.nombre,
+        RUT: planNutricional.fkFicha.fkUsuario.rut,
+        CORREO: planNutricional.fkFicha.fkUsuario.correo,
+        SEXO: planNutricional.fkFicha.fkUsuario.sexo,
+        FECHA_NACIMIENTO:
+          planNutricional.fkFicha.fkUsuario.fechaNacimiento.toLocaleDateString(),
         OBJETIVO_PLAN: planNutricional.objetivoPlan,
         RECOMENDACION_INICIAL: planNutricional.recomendacionInicial,
         DIAGNOSTICO_NUTRICIONAL: planNutricional.diagnosticoNutricional,
@@ -101,7 +96,7 @@ export class PdfManagerService {
       }
 
       return new StreamableFile(fs.createReadStream(pdfFilePath), {
-        disposition: `attachment; filename="plan_nutricional_${rut}.pdf"`,
+        disposition: `attachment; filename="plan_nutricional_${planNutricional.fkFicha.fkUsuario.rut}.pdf"`,
         type: 'application/pdf',
       });
     } catch (error) {

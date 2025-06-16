@@ -8,5 +8,6 @@ import { PlanNutricional } from './entities/plan-nutricional.entity';
   imports: [TypeOrmModule.forFeature([PlanNutricional])],
   controllers: [PlanNutricionalController],
   providers: [PlanNutricionalService],
+  exports: [PlanNutricionalService],
 })
 export class PlanNutricionalModule {}

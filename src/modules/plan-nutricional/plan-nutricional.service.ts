@@ -26,4 +26,19 @@ export class PlanNutricionalService {
     });
     return await this.repository.save(planNutricional);
   }
+
+  public async findPlanNutricionalById(id: number): Promise<PlanNutricional> {
+    const planNutricional = await this.repository
+      .createQueryBuilder('planNutricional')
+      .leftJoinAndSelect('planNutricional.fkFicha', 'ficha')
+      .leftJoinAndSelect('ficha.fkUsuario', 'usuario')
+      .where('planNutricional.id = :id', { id })
+      .getOne();
+
+    if (!planNutricional) {
+      throw new Error(`Plan Nutricional with ID ${id} not found`);
+    }
+
+    return planNutricional;
+  }
 }
