@@ -41,4 +41,27 @@ export class PlanNutricionalService {
 
     return planNutricional;
   }
+
+  public async updatePlanNutricional(
+    id: number,
+    dto: UpdatePlanNutricionalDto,
+  ): Promise<PlanNutricional> {
+    const planNutricional = await this.repository
+      .createQueryBuilder('planNutricional')
+      .where('planNutricional.id = :id', { id })
+      .getOne();
+
+    if (!planNutricional) {
+      throw new Error(`Plan Nutricional with ID ${id} not found`);
+    }
+
+    const updatedPlanNutricional = this.repository.merge(planNutricional, {
+      diagnosticoNutricional: dto.diagnosticoNutricional,
+      objetivoPlan: dto.objetivoPlan,
+      planAlimentario: dto.planAlimentario,
+      recomendacionInicial: dto.recomendacionInicial,
+    });
+
+    return this.repository.save(updatedPlanNutricional);
+  }
 }

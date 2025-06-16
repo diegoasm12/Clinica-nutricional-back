@@ -23,4 +23,15 @@ export class PlanNutricionalController {
       createPlanNutricionalDto,
     );
   }
+
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updatePlanNutricionalDto: UpdatePlanNutricionalDto,
+  ) {
+    return this.planNutricionalService.updatePlanNutricional(
+      +id,
+      updatePlanNutricionalDto,
+    );
+  }
 }
