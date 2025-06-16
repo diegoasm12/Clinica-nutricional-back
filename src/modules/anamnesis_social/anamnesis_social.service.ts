@@ -41,7 +41,7 @@ export class AnamnesisSocialService {
       throw new NotFoundException('Anamnesis Social not found');
     }
 
-    const updatedAnamnesisSocial = this.repository.create({
+    const updatedAnamnesisSocial = this.repository.merge(anamnesisSocial, {
       asisteCon: updateAnamnesisSocialDto.asisteCon,
       hijos: updateAnamnesisSocialDto.hijos,
       viveCon: updateAnamnesisSocialDto.viveCon,

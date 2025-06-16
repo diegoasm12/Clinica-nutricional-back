@@ -53,14 +53,17 @@ export class REncuestaTendenciaConsumoAlimentoService {
       fechaEliminacion = null;
     }
 
-    const updatedREncuestaTendenciaConsumoAlimento = this.repository.create({
-      cuantosDiasSemana:
-        updateREncuestaTendenciaConsumoAlimentoDto.cuantosDiasSemana,
-      fkAlimento: {
-        id: updateREncuestaTendenciaConsumoAlimentoDto.fkAlimento_id,
+    const updatedREncuestaTendenciaConsumoAlimento = this.repository.merge(
+      rEncuestaTendenciaConsumoAlimento,
+      {
+        cuantosDiasSemana:
+          updateREncuestaTendenciaConsumoAlimentoDto.cuantosDiasSemana,
+        fkAlimento: {
+          id: updateREncuestaTendenciaConsumoAlimentoDto.fkAlimento_id,
+        },
+        fechaEliminacion: fechaEliminacion,
       },
-      fechaEliminacion: fechaEliminacion,
-    });
+    );
 
     return this.repository.save(updatedREncuestaTendenciaConsumoAlimento);
   }

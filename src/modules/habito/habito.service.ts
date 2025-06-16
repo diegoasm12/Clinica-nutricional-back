@@ -37,7 +37,7 @@ export class HabitoService {
       throw new Error('Habito not found');
     }
 
-    const updatedHabito = this.repository.create({
+    const updatedHabito = this.repository.merge(habito, {
       actividadFisica: updateHabitoDto.actividadFisica,
       alcohol: updateHabitoDto.alcohol,
       droga: updateHabitoDto.droga,

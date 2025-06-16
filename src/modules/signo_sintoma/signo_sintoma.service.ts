@@ -47,7 +47,7 @@ export class SignoSintomaService {
       throw new NotFoundException(`SignoSintoma with id ${id} not found`);
     }
 
-    const updatedSignoSintoma = this.repository.create({
+    const updatedSignoSintoma = this.repository.merge(signoSintoma, {
       apetito: updateSignoSintomaDto.apetito,
       calambre: updateSignoSintomaDto.calambre,
       deposicionBristol: updateSignoSintomaDto.deposicionBristol,

@@ -46,7 +46,7 @@ export class RRolUsuarioService {
       fechaEliminacion = new Date();
     }
 
-    const updatedRRolUsuario = this.repository.create({
+    const updatedRRolUsuario = this.repository.merge(rRolUsuario, {
       fechaEliminacion: fechaEliminacion,
     });
 

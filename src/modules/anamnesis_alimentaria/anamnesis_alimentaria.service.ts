@@ -38,13 +38,16 @@ export class AnamnesisAlimentariaService {
       throw new Error('Anamnesis Alimentaria not found');
     }
 
-    const updatedAnamnesisAlimentaria = this.repository.create({
-      alergiaIntolerancia: dto.alergiaIntolerancia,
-      alimentoNoGusta: dto.alimentoNoGusta,
-      alimentoPreferencia: dto.alimentoPreferencia,
-      cocinaEnCasa: dto.cocinaEnCasa,
-      habitualmenteComeEn: dto.habitualmenteComeEn,
-    });
+    const updatedAnamnesisAlimentaria = this.repository.merge(
+      anamnesisAlimentaria,
+      {
+        alergiaIntolerancia: dto.alergiaIntolerancia,
+        alimentoNoGusta: dto.alimentoNoGusta,
+        alimentoPreferencia: dto.alimentoPreferencia,
+        cocinaEnCasa: dto.cocinaEnCasa,
+        habitualmenteComeEn: dto.habitualmenteComeEn,
+      },
+    );
 
     return this.repository.save(updatedAnamnesisAlimentaria);
   }

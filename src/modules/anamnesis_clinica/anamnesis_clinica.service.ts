@@ -68,7 +68,7 @@ export class AnamnesisClinicaService {
       throw new Error('Anamnesis Clinica not found');
     }
 
-    const updatedAnamnesisClinica = this.repository.create({
+    const updatedAnamnesisClinica = this.repository.merge(anamnesisClinica, {
       alergia: updateAnamnesisClinicaDto.alergia,
       anetecedenteQuirurgico: updateAnamnesisClinicaDto.anetecedenteQuirurgico,
       antecedenteFamiliar: updateAnamnesisClinicaDto.antecedenteFamiliar,
