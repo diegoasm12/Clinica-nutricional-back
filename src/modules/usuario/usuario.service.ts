@@ -41,8 +41,37 @@ export class UsuarioService {
   public async findUsers(idRol?: number): Promise<Usuario[]> {
     const query = this.repository
       .createQueryBuilder('usuario')
-      .innerJoinAndSelect('usuario.rRolUsuario', 'rRolUsuario')
-      .innerJoinAndSelect('rRolUsuario.fkRol', 'rol');
+      .leftJoinAndSelect('usuario.rRolUsuario', 'rRolUsuario')
+      .leftJoinAndSelect('rRolUsuario.fkRol', 'rol')
+      .leftJoinAndSelect('usuario.fichas', 'ficha')
+      .leftJoinAndSelect('ficha.fkUsuario', 'usuarioFicha')
+      .leftJoinAndSelect('ficha.fkAnamnesisSocial', 'anamnesisSocial')
+      .leftJoinAndSelect('ficha.fkAnamnesisClinica', 'anamnesisClinica')
+      .leftJoinAndSelect('anamnesisClinica.habitos', 'habitos')
+      .leftJoinAndSelect('anamnesisClinica.signosSintomas', 'signosSintomas')
+      .leftJoinAndSelect('ficha.fkAnamnesisAlimentaria', 'anamnesisAlimentaria')
+      .leftJoinAndSelect(
+        'ficha.fkEncuestaTendenciaConsumo',
+        'encuestaTendenciaConsumo',
+      )
+      .leftJoinAndSelect(
+        'encuestaTendenciaConsumo.rEncuestaTendenciaConsumoAlimento',
+        'rEncuestaTendenciaConsumoAlimento',
+      )
+      .leftJoinAndSelect(
+        'rEncuestaTendenciaConsumoAlimento.fkAlimento',
+        'alimento',
+      )
+      .leftJoinAndSelect('ficha.antropometrias', 'antropometria')
+      .leftJoinAndSelect('antropometria.tomasPliegues', 'tomaPliegue')
+      .leftJoinAndSelect('ficha.registros24h', 'registro24h')
+      .leftJoinAndSelect(
+        'registro24h.rRegistro24hTipocomidas',
+        'rRegistro24hTipocomidas',
+      )
+      .leftJoinAndSelect('rRegistro24hTipocomidas.fkTipoComida', 'tipoComida')
+      .leftJoinAndSelect('ficha.planesNutricionales', 'planNutricional')
+      .leftJoinAndSelect('ficha.examenes', 'examen');
 
     if (idRol) {
       query.where('rol.id = :idRol', { idRol });
@@ -54,8 +83,37 @@ export class UsuarioService {
   public async findUserByRut(rut: number): Promise<Usuario> {
     const user = await this.repository
       .createQueryBuilder('usuario')
-      .innerJoinAndSelect('usuario.rRolUsuario', 'rRolUsuario')
-      .innerJoinAndSelect('rRolUsuario.fkRol', 'rol')
+      .leftJoinAndSelect('usuario.rRolUsuario', 'rRolUsuario')
+      .leftJoinAndSelect('rRolUsuario.fkRol', 'rol')
+      .leftJoinAndSelect('usuario.fichas', 'ficha')
+      .leftJoinAndSelect('ficha.fkUsuario', 'usuarioFicha')
+      .leftJoinAndSelect('ficha.fkAnamnesisSocial', 'anamnesisSocial')
+      .leftJoinAndSelect('ficha.fkAnamnesisClinica', 'anamnesisClinica')
+      .leftJoinAndSelect('anamnesisClinica.habitos', 'habitos')
+      .leftJoinAndSelect('anamnesisClinica.signosSintomas', 'signosSintomas')
+      .leftJoinAndSelect('ficha.fkAnamnesisAlimentaria', 'anamnesisAlimentaria')
+      .leftJoinAndSelect(
+        'ficha.fkEncuestaTendenciaConsumo',
+        'encuestaTendenciaConsumo',
+      )
+      .leftJoinAndSelect(
+        'encuestaTendenciaConsumo.rEncuestaTendenciaConsumoAlimento',
+        'rEncuestaTendenciaConsumoAlimento',
+      )
+      .leftJoinAndSelect(
+        'rEncuestaTendenciaConsumoAlimento.fkAlimento',
+        'alimento',
+      )
+      .leftJoinAndSelect('ficha.antropometrias', 'antropometria')
+      .leftJoinAndSelect('antropometria.tomasPliegues', 'tomaPliegue')
+      .leftJoinAndSelect('ficha.registros24h', 'registro24h')
+      .leftJoinAndSelect(
+        'registro24h.rRegistro24hTipocomidas',
+        'rRegistro24hTipocomidas',
+      )
+      .leftJoinAndSelect('rRegistro24hTipocomidas.fkTipoComida', 'tipoComida')
+      .leftJoinAndSelect('ficha.planesNutricionales', 'planNutricional')
+      .leftJoinAndSelect('ficha.examenes', 'examen')
       .where('usuario.rut = :rut', { rut })
       .getOne();
 
