@@ -38,12 +38,17 @@ export class UsuarioService {
     return user;
   }
 
-  public async findUsers(): Promise<Usuario[]> {
-    return this.repository
+  public async findUsers(idRol?: number): Promise<Usuario[]> {
+    const query = this.repository
       .createQueryBuilder('usuario')
       .innerJoinAndSelect('usuario.rRolUsuario', 'rRolUsuario')
-      .innerJoinAndSelect('rRolUsuario.fkRol', 'rol')
-      .getMany();
+      .innerJoinAndSelect('rRolUsuario.fkRol', 'rol');
+
+    if (idRol) {
+      query.where('rol.id = :idRol', { idRol });
+    }
+
+    return query.getMany();
   }
 
   public async findUserByRut(rut: number): Promise<Usuario> {

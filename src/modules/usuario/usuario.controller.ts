@@ -6,11 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { RecoveryPasswordDto } from './dto/recovery-password.dto';
+import { ApiQuery } from '@nestjs/swagger';
 
 @Controller('usuario')
 export class UsuarioController {
@@ -32,8 +34,14 @@ export class UsuarioController {
   }
 
   @Get()
-  findAll() {
-    return this.usuarioService.findUsers();
+  @ApiQuery({
+    name: 'idRol',
+    required: false,
+    description: 'ID of the role to filter users',
+    type: Number,
+  })
+  findAll(@Query('idRol') idRol?: number) {
+    return this.usuarioService.findUsers(idRol);
   }
 
   @Get(':rut')
